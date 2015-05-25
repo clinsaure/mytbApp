@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="C:\Users\valery.kamdem\Dokumente\NetBeansProjects\mytbApp\platforms\android\build\intermediates\exploded-aar\android\CordovaLib\unspecified\debug\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="c7fc39a4d0a18504aa9622cc6639bbd3fd760182">
+        <dex dex="C:\Users\valery.kamdem\Dokumente\NetBeansProjects\mytbApp\platforms\android\build\intermediates\pre-dexed\debug\classes-95923e99ade0185dc2f373aa1258655b848e0c22.jar" />
+    </item>
+
+</items>
