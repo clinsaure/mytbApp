@@ -88,31 +88,31 @@ angular.module('starter.controllers', [])
      // Form data for the login modal
   $scope.loginData = {};
 
-  
-  // Create the login modal that we will use later
-  $ionicModal.fromTemplateUrl('templates/login/login.html', {
-    scope: $scope
-  }).then(function(modal) {
-      
-  $("#logintextE").on("keyup", function () {
-            $("#loginMsg").text("");
-        });
-
-    $scope.modal = modal;
-  });
-
-  // Triggered in the login modal to close it
-  $scope.closeLogin = function() {
-    $scope.modal.hide();
-  };
-
-  // Open the login modal
-  $scope.login = function() {
-    $scope.modal.show();
-    $("#logintextE").text("");
-        $("#logintextP").text("");
-      $("#loginMsg").text("");
-  };
+//  
+//  // Create the login modal that we will use later
+//  $ionicModal.fromTemplateUrl('templates/login/login.html', {
+//    scope: $scope
+//  }).then(function(modal) {
+//      
+//  $("#logintextE").on("keyup", function () {
+//            $("#loginMsg").text("");
+//        });
+//
+//    $scope.modal = modal;
+//  });
+//
+//  // Triggered in the login modal to close it
+//  $scope.closeLogin = function() {
+//    $scope.modal.hide();
+//  };
+//
+//  // Open the login modal
+//  $scope.login = function() {
+//    $scope.modal.show();
+//    $("#logintextE").text("");
+//        $("#logintextP").text("");
+//      $("#loginMsg").text("");
+//  };
 
   // Perform the login action when the user submits the login form
     $scope.doLogin = function () {

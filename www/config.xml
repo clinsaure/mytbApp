@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.coolappz.tbApp" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>tbApp</name>
+<widget id="com.coolappz.mytbApp" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>mytbApp</name>
     <description>
         A sample Apache Cordova application that responds to the deviceready event.
     </description>
