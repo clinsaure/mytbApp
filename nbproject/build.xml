@@ -46,7 +46,7 @@ made subject to such option by the copyright holder.
 <!--
     Generated file; DO NOT EDIT.
 -->
-<project name="tbApp" basedir="..">
+<project name="mytbApp" basedir="..">
     <property file="nbproject/configs/${config}.properties" />
 
     <scriptdef name="checkVersion" language="javascript">
@@ -232,7 +232,7 @@ made subject to such option by the copyright holder.
     </target>
     
     <target name="update-plugins">
-        <plugintask/>
+<!--        <plugintask/>-->
     </target>    
     
     <target name="update-android">
