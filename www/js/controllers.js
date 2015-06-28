@@ -2,7 +2,8 @@ var requestToken = "";
 var accessToken = "";
 var clientId = "200463856698-diablkbebnhc8srvgg2vg53q8or6h95t.apps.googleusercontent.com";
 var clientSecret = "xDiJAb7Yq5bUj3EI4ID2aAHF";
-var serviceURL = "http://localhost:81/tauschboerse-server/";
+//var serviceURL = "http://tbapp.kamdem-kenmogne.de/";
+var serviceURL = "http://localhost:81/tbServer/";
 
 angular.module('starter.controllers', [])
 
@@ -41,8 +42,8 @@ angular.module('starter.controllers', [])
       Articles.all()
       .success(function(images){
             $scope.images = [];
-        for(var i = 0; i < 6; i++) {
-            $scope.images.push({id: images[i], src: serviceURL + images[i].image});
+        for(var i = images.length -10; i < images.length; i++) {
+            $scope.images.push({id: images[i].article_Id, src: serviceURL + images[i].image});
 //            console.log(images[i]);
         }
       });
@@ -82,9 +83,8 @@ angular.module('starter.controllers', [])
     };
 })
 
-.controller('LoginCtrl', function($scope, $ionicModal, Login, $http, $state) { 
+.controller('LoginCtrl', function($scope, $ionicModal, Login, SignUp, $http, $state) { 
     
-    $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
      // Form data for the login modal
   $scope.loginData = {};
 
@@ -116,33 +116,29 @@ angular.module('starter.controllers', [])
 
   // Perform the login action when the user submits the login form
     $scope.doLogin = function () {
-
-//        Login.loginUser($scope.loginData);
-        $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-        var rPromise = postLogin(serviceURL + "login", $scope.loginData);
-        rPromise.success(function (response) {
-            console.log(response);
-            if (response.error === false) {
-                if (typeof (Storage) !== "undefined") {
-                    localStorage.username = response.username;
-                    localStorage.apikey = response.apiKey;
-                }
-                $state.go('app.home');
-                $scope.closeLogin();
-            } else {
-                localStorage.clear();
-                $("#loginMsg").text(response.message).css("color","red");
-            }
-        }).error(function(){
-            console.log("AJAX failed!");
-    }) ;
-                    
+        Login.loginUser($scope.loginData);   
                 // Simulate a login delay. Remove this and replace with your login
     // code if using a login system
                 //    $timeout(function() {
 //      $scope.closeLogin();
 //    }, 1000);
     };
+    
+    $scope.signUp = function(){
+        $state.go('app.signup');
+    };
+    
+    // Form data for the login modal
+            $scope.signupData = {};
+            // Perform the login action when the user submits the login form
+            $scope.doSignup = function () {
+                SignUp.signUpUser($scope.signupData);
+            };
+
+})
+
+.controller('SignUpCtrl', function($scope, $ionicModal, Login, $http, $state) { 
+    
 
 })
 

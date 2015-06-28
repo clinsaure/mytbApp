@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-var serviceURL = "http://localhost:81/tauschboerse-server/";
-//var serviceURL = "http://myjoka.com/api/";
+//var serviceURL = "http://tbapp.kamdem-kenmogne.de/";
+var serviceURL = "http://localhost:81/tbServer/";
+
 var articlesItem,
         categoriesItem,
         articleCatItem;
@@ -19,6 +20,7 @@ var localStorage = {
     apikey: null
 };
 
+angular.module('starter.services', ['ngMessages'])
 angular.module('starter.services', ['ngResource'])
 
 
@@ -37,7 +39,7 @@ var articles = function() {
 //            headers: 'Access-Control-Allow-Origin: *'
 //            })
     return $http.get(serviceURL + "articles" ,{
-        headers: 'Access-Control-Allow-Headers: Content-Type, x-xsrf-token',
+//        headers: 'Access-Control-Allow-Headers: Content-Type, x-xsrf-token',
         isArray: true,
         crossDomain : true
     })
@@ -134,74 +136,75 @@ var articleCat = function(categorieId) {
 })
 
 .factory('Login', function ($http, $state, $resource) {
-    
-$http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-////console.log(loginData);
-    var loginUser = function (loginData) {
-        
-    };
-    
 
-//        var rPromise = postLogin(serviceURL + "login", loginData);
-//        
-//        rPromise.success(function(response){
-//
-//        console.log(response);
-//                if (response.error === false) {
-//                    if (typeof (Storage) !== "undefined") {
-//                        localStorage.username = response.username;
-//                        localStorage.apikey = response.apiKey;    
-//                    }
-//                    $state.go('app.browse');
-////                    $state.reload('app.login');
-//                } else {
-//                    localStorage.clear();
-//                }
-//                responseItem = response.error;
-//    }).error(function(){
-//        console.log("AJAX failed!");
-//    });
-//return responseItem;
-//////            
-//////            
-//        $http.post(serviceURL + "login", {"email": loginData.username, "password": loginData.password})
-//            .success(function (data) {
-//                console.log('Doing login success');
-//                if (data.error === false) {
-//                    alert(data.error);
-//                    if (typeof (Storage) !== "undefined") {
-//                        localStorage.Username = data.username;
-//                    }
-//                } else {
-//                    localStorage.Username = "";
-//                    alert(data.message);
-//                }
-//
-//            })
-//        .error(function (data) {
-//            console.log('Doing login failled');
-//            alert(data.message);
-//        });
-//    };
-//    
+    $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+    var loginUser = function (loginData) {
+        var logindata = "email=" + loginData.email + "&password=" + loginData.password;
+        // Simple POST request example (passing data) :
+        $http.post(serviceURL + "login", logindata).
+                success(function (data, status, headers, config) {
+                    // this callback will be called asynchronously
+                    // when the response is available
+                    if (data.error === false) {
+                        if (typeof (Storage) !== "undefined") {
+                            localStorage.username = data.username;
+                            localStorage.apikey = data.apiKey;
+                        }
+                        $state.go('app.home');
+                    } else {
+                        localStorage.clear();
+                        $("#loginMsg").text(data.message).css("color", "red");
+                    }
+                }).
+                error(function (data, status, headers, config) {
+                    // called asynchronously if an error occurs
+                    // or server returns response with an error status.
+                    console.log("AJAX failed!");
+                });
+    };
+
     return {
         loginUser: loginUser
     };
-});
+})
 
-//.factory('Login', ['$resource', function ($http, $state, $resource) {
-//        return $resource( serviceURL + "login", {email: "username", password: "password"}, { 
-//      loginUser: { 
-//        method: 'POST', 
-//        params: {email: "username", password: "password"}, 
-//        isArray: false 
-//      } 
-//      /* , method2: { ... } */
-//    });
-//    return {
-//        loginUser: loginUser
-//    };
-//}]);
+.factory('SignUp', function ($http, $state, $resource, $filter) {
+    
+$http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+////console.log(loginData);
+    var signUpUser = function (signupData) {
+        console.log(signupData);
+        var appDate = $filter('date')(signupData.birthdate, "yyyy-MM-dd");
+        console.log(appDate);
+        var signUpdata = "username=" + signupData.username + 
+                "&email=" + signupData.email +
+                "&password=" + signupData.password +
+                "&birthdate=" + appDate ;
+        
+        // Simple POST request example (passing data) :
+        $http.post(serviceURL + "register", signUpdata).
+                success(function (data, status, headers, config) {
+                    // this callback will be called asynchronously
+                    // when the response is available
+                    console.log(data);
+                    if (data.error === false) {
+                        $state.go('app.home');
+                    } else {
+                        localStorage.clear();
+                        $("#loginMsg").text(data.message).css("color", "red");
+                    }
+                }).
+                error(function (data, status, headers, config) {
+                    // called asynchronously if an error occurs
+                    // or server returns response with an error status.
+                    console.log("AJAX failed!");
+                });
+    };
+       
+    return {
+        signUpUser: signUpUser
+    };
+});
 
 function postLogin(url, obj){
     return $.ajax({

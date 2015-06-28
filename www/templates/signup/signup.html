@@ -1,0 +1,39 @@
+<ion-view view-title="Sign Up">
+  <ion-header-bar>
+    <h1 class="title">Sign Up</h1>
+    
+  </ion-header-bar>
+  <ion-content>
+      <form name="mySignupForm" novalidate>
+      <div class="list">
+        <label class="item item-input">
+          <span class="input-label">Username</span>
+          <input type="text" name="username" id="signuptextU" ng-model="signupData.username" 
+                 ng-minlength="2" ng-maxlength="20" required>
+          <!--<div ng-messages="mySignupForm.username.$error" ng-messages-include="error.html"></div>-->
+ <!--         <p ng-show="mySignupForm.username.$invalid && !mySignupForm.username.$pristine" class="help-block">Veuillez indiquer votre nom</p>-->
+        </label>
+          <label class="item item-input">
+          <span class="input-label">E-mail</span>
+          <input name="mail" type="email" required id="signuptextE" ng-model="signupData.email">
+          <!--<div ng-messages="mySignupForm.mail.$error" ng-messages-include="error/error.html"></div>-->
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Password</span>
+          <input type="password" id="signuptextP" ng-model="signupData.password">
+        </label>
+          
+        <label class="item item-input">
+          <span class="input-label">Birthdate</span>
+          <input type="date" id="signuptextB" ng-model="signupData.birthdate">
+        </label>
+        <label class="item">
+            <button class="button button-block button-positive" ng-click="doSignup()"  type="submit">Sign Up</button>
+        </label>
+         
+      </div>
+    </form>
+  </ion-content>
+<!--</ion-modal-view>-->
+</ion-view>
+

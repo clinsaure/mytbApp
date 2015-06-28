@@ -4,6 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
+angular.module('starter', ['ngMessages'])
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ngCordova'])
 
 .run(function($ionicPlatform) {
@@ -20,8 +21,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
   });
 })
 
+.config(function($httpProvider) {
+      //Enable cross domain calls
+      $httpProvider.defaults.useXDomain = true;
+
+      //Remove the header used to identify ajax call  that would prevent CORS from working
+      delete $httpProvider.defaults.headers.common['X-Requested-With'];
+  })
+
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
+
 
 //.state('tab', {
 //    url: "/tab",
@@ -80,6 +90,18 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     views: {
       'menuContent': {
         templateUrl: "templates/login/login.html",
+        controller: 'LoginCtrl'
+      }
+    }
+  })
+  
+  .state('app.signup', {
+    url: "/signup",
+//    abstract: true,
+    views: {
+      'menuContent': {
+        templateUrl: "templates/signup/signup.html",
+        //controller: 'SignUpCtrl'
         controller: 'LoginCtrl'
       }
     }
