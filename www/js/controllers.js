@@ -60,6 +60,17 @@ angular.module('starter.controllers', [])
             
 })
 
+.controller('ArticlePostCtrl', function($scope, $stateParams, ArticlePost) {  
+    // Form data for the login modal
+    $scope.articlePostData = {};
+    // Perform the login action when the user submits the login form
+    $scope.doarticlePost = function () {
+        alert("salut");
+        console.log($scope.articlePostData);
+//        ArticlePost.articlePost($scope.articlePostData);
+    };
+})
+
 // Categories
 .controller('CategoriesCtrl', function($scope, Categories) {
     Categories.all()

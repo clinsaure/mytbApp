@@ -132,7 +132,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     views: {
       'menuContent': {
         templateUrl: "templates/article/articlePost.html",
-        controller: 'ArticleCtrl'
+        controller: 'ArticlePostCtrl'
       }
     }
   })

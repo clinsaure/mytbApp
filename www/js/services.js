@@ -135,6 +135,32 @@ var articleCat = function(categorieId) {
   };
 })
 
+.factory('ArticlePost', function($http, $state){
+    $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+    var articlePost = function (articlePostData) {
+        var articledata = "categorie_Id=" + articlePostData.catId + "&name=" + articlePostData.name +
+                "&description" + articlePostData.description + "&image" + articlePostData.image;
+        // Simple POST request example (passing data) :
+        $http.post(serviceURL + "article", articledata).
+                success(function (data, status, headers, config) {
+                    // this callback will be called asynchronously
+                    // when the response is available
+                    if (data.error === false) {
+                        $state.go('app.articles');
+                    } else {
+                        $("#loginMsg").text(data.message).css("color", "red");
+                    }
+                }).
+                error(function (data, status, headers, config) {
+                    console.log("AJAX failed!");
+                });
+    };
+
+    return {
+        articlePost: articlePost
+    };
+})
+
 .factory('Login', function ($http, $state, $resource) {
 
     $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
@@ -159,6 +185,7 @@ var articleCat = function(categorieId) {
                 error(function (data, status, headers, config) {
                     // called asynchronously if an error occurs
                     // or server returns response with an error status.
+                    $("#loginMsg").text(data.message).css("color", "red");
                     console.log("AJAX failed!");
                 });
     };
@@ -188,15 +215,16 @@ $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded
                     // when the response is available
                     console.log(data);
                     if (data.error === false) {
-                        $state.go('app.home');
+                        $state.go('app.login');
+                        arlet("Please login to use the App");
                     } else {
-                        localStorage.clear();
-                        $("#loginMsg").text(data.message).css("color", "red");
+                        $("#signUpMsg").text(data.message).css("color", "red");
                     }
                 }).
                 error(function (data, status, headers, config) {
                     // called asynchronously if an error occurs
                     // or server returns response with an error status.
+                    $("#signUpMsg").text(data.message).css("color", "red");
                     console.log("AJAX failed!");
                 });
     };

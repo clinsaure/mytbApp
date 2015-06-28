@@ -8,29 +8,29 @@ and open the template in the editor.
 <ion-view view-title="Post Article">
     <ion-content>
         <!--    <h1>Put Article</h1>-->
-<form ng-submit="postArticle()">
+<form ng-submit="doarticlePost()">
         <div class="list">
 
             <label class="item item-input item-select">
-                <span class="input-label">Gategories</span>
-                <select>
+                <span class="input-label">Categories</span>
+                <select ng-model="articlePostData.catId">
                     <option></option>
-                    <option>Blue</option>
+                    <option >Blue</option >
                     <!--<option selected>Green</option>-->
                     <option>Red</option>
                 </select>
             </label>
             <label class="item item-input">
                 <span class="input-label">Name</span>
-                <input type="text">
+                <input type="text" ng-model="articlePostData.name">
             </label>
             <label class="item item-input">
                 <span class="input-label">Description</span>
-                <input type="text">
+                <textarea type="text" ng-model="articlePostData.description"></textarea>
             </label>
             <label class="item item-input">
                 <span class="input-label">Img</span>
-                <input type="text">
+                <input type="text" ng-model="articlePostData.image">
             </label>
             <label class="item">
                 <button class="button button-block button-positive" type="submit">Submit</button>
