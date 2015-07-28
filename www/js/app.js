@@ -52,7 +52,8 @@ angular.module('starter', ['ionic', 'starter.menu.controllers', 'starter.menu.se
     url: "/message",
     views: {
       'menuContent': {
-        templateUrl: "templates/message/message.html"
+        templateUrl: "templates/message/message.html",
+        controller: 'messagesCtrl'
       }
     }
   })
@@ -162,11 +163,12 @@ angular.module('starter', ['ionic', 'starter.menu.controllers', 'starter.menu.se
             'menuContent': {
                 //url: '/artcMessage',
                 templateUrl: 'templates/message/artcMessage.html',
-                controller: 'messageArtcCtrl'
+                controller: 'messagesCtrl'
             }
         }
     })
     
+  
     ;
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/home');

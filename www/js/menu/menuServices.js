@@ -11,15 +11,6 @@ var articlesItem,
         categoriesItem,
         articleCatItem;
 var responseItem;
-var localStorage = {
-    firstname: null,
-    lastname: null,
-    username: null,
-    email: null,
-    image: null,
-    name:null,
-    apikey: null
-};
 
 angular.module('starter.menu.services', ['ngMessages']),
 angular.module('starter.menu.services', ['ngResource'])

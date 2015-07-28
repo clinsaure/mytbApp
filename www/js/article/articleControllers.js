@@ -1,13 +1,12 @@
 "use strict";
 //var serviceURL = "http://tbapp.kamdem-kenmogne.de/";
 var serviceURL = "http://localhost:81/tbServer/";
-
+var angular;
 var localStorage = {
     articleId: null
 };
 
 angular.module('starter.article.controllers', ['starter.article.services'])
-
 
 //Articles
 .controller('ArticlesCtrl', function($http, $scope, $stateParams, Articles) {

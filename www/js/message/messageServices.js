@@ -8,20 +8,12 @@
 var serviceURL = "http://localhost:81/tbServer/";
 var angular;
 var responseItem;
-var localStorage = {
-    firstname: null,
-    lastname: null,
-    username: null,
-    email: null,
-    image: null,
-    name:null,
-    apikey: null
-};
+var messagesItem;
 
 angular.module('starter.user.services', ['ngMessages']),
 angular.module('starter.message.services', ['ngResource'])
 
-.factory('SendMsg', function ($http, $state, $resource, $ionicPopup) {
+.factory('Messages', function ($http, $state, $resource, $ionicPopup) {
 
     $http.defaults.headers.common["Content-Type"] = "application/x-www-form-urlencoded";
     $http.defaults.headers.common['Authorization'] = sessionStorage.getItem("apikey");
@@ -54,56 +46,47 @@ angular.module('starter.message.services', ['ngResource'])
                         });
                 });
     };
+    
+    var _messages = function() {
+
+    return $http.get(serviceURL + "messages" ,{
+        headers: 'Access-Control-Allow-Headers: Content-Type, x-xsrf-token',
+        isArray: true,
+        crossDomain : true
+    })
+        .success(function(data) {
+            messagesItem = data;
+         });   
+};
 
     return {
-        newMsg: newMsg
+        newMsg: newMsg,
+        all: _messages
     };
 })
 
-.factory('SignUp', function ($http, $state, $resource, $filter) {
-    
-$http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-////console.log(loginData);
-    var signUpUser = function (signupData) {
-        console.log(signupData);
-        var appDate = $filter('date')(signupData.birthdate, "yyyy-MM-dd");
-        console.log(appDate);
-        var signUpdata = "username=" + signupData.username + 
-                "&email=" + signupData.email +
-                "&password=" + signupData.password +
-                "&birthdate=" + appDate ;
-        
-        // Simple POST request example (passing data) :
-        $http.post(serviceURL + "register", signUpdata).
-                success(function (data, status, headers, config) {
-                    // this callback will be called asynchronously
-                    // when the response is available
-                    console.log(data);
-                    if (data.error === false) {
-                        $state.go('app.login');
-                        arlet("Please login to use the App");
-                    } else {
-                        $("#signUpMsg").text(data.message).css("color", "red");
-                    }
-                }).
-                error(function (data, status, headers, config) {
-                    // called asynchronously if an error occurs
-                    // or server returns response with an error status.
-                    $("#signUpMsg").text(data.message).css("color", "red");
-                    console.log("AJAX failed!");
-                });
-    };
-       
-    return {
-        signUpUser: signUpUser
-    };
-});
+//.factory('Message', function ($http, $state, $resource, $filter) {
+//    
+//$http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+//$http.defaults.headers.common['Authorization'] = sessionStorage.getItem("apikey");
+//  // Some fake testing data      
+//var _messages = function() {
+//
+//    return $http.get(serviceURL + "messages" ,{
+//        headers: 'Access-Control-Allow-Headers: Content-Type, x-xsrf-token',
+//        isArray: true,
+//        crossDomain : true
+//    })
+//        .success(function(data) {
+//            messagesItem = data;
+//         });   
+//};
+//
+//  return {
+//    all: _messages
+//    };
+//    
+//  })
 
-function postLogin(url, obj){
-    return $.ajax({
-        type: "POST",
-        url: url,
-        cache: true,
-        data: obj
-    });
-}
+;
+
