@@ -1,11 +1,13 @@
+"use strict";
 // Ionic Starter App
 
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ngMessages'])
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ngCordova'])
+//angular.module('starter', ['ngMessages'])
+var angular;
+angular.module('starter', ['ionic', 'starter.menu.controllers', 'starter.menu.services', 'ngCordova','ngMessages'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -46,11 +48,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     controller: 'AppCtrl'
   })
     
-  .state('app.benachrichtigungen', {
-    url: "/benachrichtigungen",
+  .state('app.message', {
+    url: "/message",
     views: {
       'menuContent': {
-        templateUrl: "templates/message/benachrichtigungen.html"
+        templateUrl: "templates/message/message.html"
       }
     }
   })
@@ -84,25 +86,24 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
   }
 })
 
-.state('app.login', {
-    url: "/login",
-//    abstract: true,
+.state('app.signIn', {
+    url: "/signIn",
     views: {
       'menuContent': {
-        templateUrl: "templates/login/login.html",
-        controller: 'LoginCtrl'
+        templateUrl: "templates/signIn/signIn.html",
+        controller: 'SignInCtrl'
       }
     }
   })
   
-  .state('app.signup', {
-    url: "/signup",
+  .state('app.signUp', {
+    url: "/signUp",
 //    abstract: true,
     views: {
       'menuContent': {
-        templateUrl: "templates/signup/signup.html",
-        //controller: 'SignUpCtrl'
-        controller: 'LoginCtrl'
+        templateUrl: "templates/signUp/signUp.html",
+        controller: 'SignUpCtrl'
+//        controller: 'LoginCtrl'
       }
     }
   })
@@ -141,20 +142,32 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     url: '/loginGoogle',            
         views:{
             'menuContent': {
-                templateUrl: 'templates/login/loginGoogle.html',
+                templateUrl: 'templates/signIn/loginGoogle.html',
                 controller: 'LoginGoogleCtrl'
             }
         }
     })
     .state('app.secure', {
+        url: '/secure',
         views: {
             'menuContent': {
-                url: '/secure',
-                templateUrl: 'templates/login/secure.html',
+                templateUrl: 'templates/signIn/secure.html',
                 controller: 'SecureController'
             }
         }
-    });
+    })
+    .state('app.artcMessage', {
+        url:'/artcMessage/:articleId',
+        views: {
+            'menuContent': {
+                //url: '/artcMessage',
+                templateUrl: 'templates/message/artcMessage.html',
+                controller: 'messageArtcCtrl'
+            }
+        }
+    })
+    
+    ;
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/home');
 });

@@ -1,0 +1,21 @@
+<ion-view view-title="Message">
+    <ion-content>
+
+        <h1>Benachrichtigungen</h1>
+
+                <--! tabs-->
+        <ion-tabs class="tabs-positive tabs-icon-only">
+
+                  <ion-tab title="Inbox" icon-on="ion-ios-filing" icon-off="ion-ios-filing-outline" href="#/message/list">
+                    <!-- Tab 1 content -->
+                    <ion-nav-view name="InboxTab"></ion-nav-view>
+                  </ion-tab>
+
+                  <ion-tab title="messageBox" icon-on="ion-ios-clock" icon-off="ion-ios-clock-outline" href="#/message/emergency">
+                    <!-- Tab 2 content -->
+                    <ion-nav-view name="Tab"></ion-nav-view>
+                  </ion-tab>
+
+        </ion-tabs>
+    </ion-content>
+</ion-view>

@@ -1,12 +1,12 @@
-<ion-view view-title="Login">
+<ion-view view-title="SignIn">
   <ion-header-bar>
     <h1 class="title">Login</h1>
-    <div class="buttons">
+<!--    <div class="buttons">
       <button class="button button-clear" ng-click="closeLogin()">Close</button>
-    </div>
+    </div>-->
   </ion-header-bar>
     <ion-content>
-        <form>
+        <form name="signInForm" novalidate>
             <div class="list">
                 <label class="item item-input">
                     <span class="input-label">E-mail</span>
@@ -17,7 +17,7 @@
                     <input type="password" id="logintextP" ng-model="loginData.password">
                 </label>
                 <label class="item item-input">
-                    <span class="input-label">Save Credential</span>
+                    <span class="input-label">Remember Credential</span>
                     <label class="toggle toggle-assertive">
                         <input type="checkbox">
                         <div class="track">
@@ -31,9 +31,9 @@
                 <label class="item">
                     <button class="button button-block button-positive" ng-click="doLogin()" type="submit">Log in</button>
                 </label>
-                <div class="padding" ng-controller="LoginGoogleCtrl">
+<!--                <div class="padding" ng-controller="LoginGoogleCtrl">
                     <button ng-click="login()" class="button button-block button-stable">Log In Google</button>
-                </div>
+                </div>-->
                 <label class="item">
                     <button ng-click="signUp()" class="button button-block button-positive">
                         Sign Up

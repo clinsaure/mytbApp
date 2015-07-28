@@ -6,31 +6,36 @@ and open the template in the editor.
 -->
 
 <ion-view view-title="Post Article">
-    <ion-content>
+    <ion-content ng-init="getCategories()">
         <!--    <h1>Put Article</h1>-->
-<form ng-submit="doarticlePost()">
+<form name="formInfo" ng-submit="doarticlePost()" novalidate>
         <div class="list">
 
-            <label class="item item-input item-select">
+            <label class="item item-input">
                 <span class="input-label">Categories</span>
-                <select ng-model="articlePostData.catId">
-                    <option></option>
-                    <option >Blue</option >
-                    <!--<option selected>Green</option>-->
-                    <option>Red</option>
-                </select>
+                <select ng-model="articlePostData.catName">
+                    <option  ng-repeat="cat in categories">{{cat.name}}</option>
+                </select> 
             </label>
             <label class="item item-input">
                 <span class="input-label">Name</span>
-                <input type="text" ng-model="articlePostData.name">
+                <input type="text" ng-model="articlePostData.name" name="name" required="yes" minlength="5">
             </label>
+            <label>
+               <div ng-messages="formInfo.name.$error" style="color:red" role="alert" ng-if="formInfo.$submitted">
+                    <div ng-message="required">Name required</div>
+                    <div ng-message="minlength">Name to long</div>
+                    <div ng-message="maxlength">Name to shot</div>
+                </div> 
+            </label>
+            
             <label class="item item-input">
                 <span class="input-label">Description</span>
                 <textarea type="text" ng-model="articlePostData.description"></textarea>
             </label>
             <label class="item item-input">
                 <span class="input-label">Img</span>
-                <input type="text" ng-model="articlePostData.image">
+                <input type="file" ng-model="articlePostData.image">
             </label>
             <label class="item">
                 <button class="button button-block button-positive" type="submit">Submit</button>
@@ -39,14 +44,3 @@ and open the template in the editor.
 </form>
     </ion-content>
 </ion-view>
-
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <p>hallo</p>
-    </body>
-</html>
