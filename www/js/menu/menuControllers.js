@@ -13,11 +13,22 @@ angular.module('starter.menu.controllers', ['starter.signUp.controllers',
 .controller('AppCtrl', function($scope, $ionicModal , $state) {
     
     if(sessionStorage.getItem("username") !== null){
-       $("#titelUname").text("Hallo " + sessionStorage.getItem("username")).css("color", "green"); 
+       $("#titelUname").text("Hallo " + sessionStorage.getItem("username")).css("color", "green");
+       $scope.showpostArticle = true;
+       $scope.showMail = true;
+       $scope.showMyArticles = true;
+       $scope.showPostArticle = true;
+       $scope.showMyWishList = true;
+       $scope.showPostWishList = true;
     }else{
-        $("#titelUname").text("Hallo Gast").css("color", "green"); 
+        $("#titelUname").text("Hallo Gast").css("color", "green");
+        $scope.showpostArticle = false;
+        $scope.showMail = false;
+        $scope.showMyArticles = false;
+        $scope.showPostArticle = false;
+        $scope.showMyWishList = false;
+        $scope.showPostWishList = false;
     }
-    
     
     
     $scope.articles = function(){

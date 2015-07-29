@@ -11,7 +11,7 @@
                 </button>
             </ion-nav-buttons>
             <ion-nav-buttons side="right">
-                <a class="tab-item" href="#/app/message">
+                <a class="tab-item" href="#/app/messages">
                     <i class="icon ion-android-notifications"></i>
                 </a>
                 <!--<button class="button button-icon button-clear ion-navicon" href="#/app/browse">-->
@@ -54,7 +54,7 @@
                     <i class="icon ion-key"></i>
                     Login
                 </ion-item>
-                <ion-item  class="item item-icon-left" nav-clear menu-close href="#/app/message">
+                <ion-item  class="item item-icon-left" nav-clear menu-close href="#/app/messages" ng-show="showMail">
                     <i class="icon ion-email"></i>
                     Check mail
                     <span class="badge badge-assertive">0</span>
@@ -62,14 +62,17 @@
                 <ion-item nav-clear menu-close href="#/app/articles">
                     Articles
                 </ion-item>
-                <!--        <ion-item nav-clear menu-close href="#/app/home">
-                          Browse
-                        </ion-item>-->
-                <ion-item nav-clear menu-close href="#/app/articlePost">
-                    Inset Article
+                <ion-item nav-clear menu-close href="#/app/articles" ng-show="showMyArticles">
+                    My articles
+                </ion-item>
+                <ion-item nav-clear menu-close href="#/app/articlePost" ng-show="showPostArticle">
+                    Post Article
                 </ion-item >
-                <ion-item nav-clear menu-close href="#/app/loginGoogle">
-                    Google
+                <ion-item nav-clear menu-close href="#/app/articles" ng-show="showMyWishList">
+                    My Wish List
+                </ion-item>
+                <ion-item nav-clear menu-close href="#/app/articles" ng-show="showPostWishList">
+                    Post Wish Liste
                 </ion-item>
             </ion-list>
         </ion-content>

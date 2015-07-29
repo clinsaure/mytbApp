@@ -43,13 +43,10 @@ $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded
     };
 
     $scope.doartcmessagePost = function () {
-
-        Messages.newMsg($scope.postMsgData);
-//        console.log("Article Id " + sessionStorage.getItem("articleId"));   
+        Messages.newMsg($scope.postMsgData);  
     };
     
     $scope.loadMessages = function() {
-        console.log("dans message");
         Messages.all()
         .success(function(messages){
 //       $scope.articles = articles;
@@ -62,6 +59,20 @@ $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded
     });
     };
 
+})
+
+.controller('messageCtrl', function($http, $scope,$state, $stateParams, Messages) {  
+
+$http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+
+//sessionStorage.articleId = $stateParams.articleId;
+    var selectMessage = Messages.get($stateParams.messageId);
+    $scope.message = selectMessage;
+                $scope.messages = [];
+        $scope.messages.push({id: selectMessage.messages_Id, object: selectMessage.object,
+           sender: selectMessage.sender, receiver: selectMessage.receiver,
+           message: selectMessage.message, date: selectMessage.sendDate});
+            
 })
 
 ;

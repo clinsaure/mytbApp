@@ -48,16 +48,26 @@ angular.module('starter', ['ionic', 'starter.menu.controllers', 'starter.menu.se
     controller: 'AppCtrl'
   })
     
-  .state('app.message', {
-    url: "/message",
+  .state('app.messages', {
+    url: "/messages",
     views: {
       'menuContent': {
-        templateUrl: "templates/message/message.html",
+        templateUrl: "templates/message/messages.html",
         controller: 'messagesCtrl'
       }
     }
   })
 
+  .state('app.message', {
+    url: "/messages/:messageId",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/message/message.html",
+        controller: 'messageCtrl'
+      }
+    }
+  })
+  
   .state('app.home', {
     url: "/home",
     views: {

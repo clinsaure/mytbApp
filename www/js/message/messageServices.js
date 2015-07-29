@@ -61,7 +61,16 @@ angular.module('starter.message.services', ['ngResource'])
 
     return {
         newMsg: newMsg,
-        all: _messages
+        all: _messages,
+        get: function (messageId) {
+//        console.log("arrivé");
+            for (var i = 0; i < messagesItem.length; i++) {
+                if (messagesItem[i].messages_Id === messageId) {
+                    return messagesItem[i];
+                }
+            }
+            return null;
+        }
     };
 })
 
