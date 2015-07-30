@@ -1,8 +1,5 @@
 "use strict";
-var requestToken = "";
-var accessToken = "";
-var clientId = "200463856698-diablkbebnhc8srvgg2vg53q8or6h95t.apps.googleusercontent.com";
-var clientSecret = "xDiJAb7Yq5bUj3EI4ID2aAHF";
+
 //var serviceURL = "http://tbapp.kamdem-kenmogne.de/";
 var serviceURL = "http://localhost:81/tbServer/";
 var angular;

@@ -1,5 +1,5 @@
-"use strict"
-//var serviceURL = "http://tbapp.kamdem-kenmogne.de/";
+"use strict";
+
 var serviceURL = "http://localhost:81/tbServer/";
 var angular;
 

@@ -4,7 +4,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-//var serviceURL = "http://tbapp.kamdem-kenmogne.de/";
 var serviceURL = "http://localhost:81/tbServer/";
 var angular;
 var responseItem;
