@@ -4,9 +4,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 var serviceURL = "http://localhost:81/tbServer/";
 var angular;
+
 angular.module('starter.signIn.controllers', ['starter.signIn.services'])
 
 .controller('SignInCtrl', function($scope, $ionicModal, SignIn, $http, $state) { 

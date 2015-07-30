@@ -2,6 +2,8 @@
 
 var serviceURL = "http://localhost:81/tbServer/";
 var angular;
+var accessToken;
+var requestToken;
 
 angular.module('starter.signUp.controllers', ['starter.signUp.services'])
 

@@ -2,9 +2,6 @@
 
 var serviceURL = "http://localhost:81/tbServer/";
 var angular;
-var localStorage = {
-    articleId: null
-};
 
 angular.module('starter.article.controllers', ['starter.article.services'])
 
@@ -14,7 +11,6 @@ angular.module('starter.article.controllers', ['starter.article.services'])
     $scope.loadArticles = function() {
         Articles.all($stateParams.categorieId)
         .success(function(articles){
-//       $scope.articles = articles;
         $scope.articles = [];
         for(var i = 0; i < articles.length ; i++) {
            $scope.articles.push({id: articles[i].article_Id, name: articles[i].name,
