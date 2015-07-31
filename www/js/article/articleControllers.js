@@ -18,10 +18,26 @@ angular.module('starter.article.controllers', ['starter.article.services'])
         }
     });
     };
+})
+
+//Articles
+.controller('MyArticlesCtrl', function($http, $scope, $stateParams, MyArticles) {
+    $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+    $scope.loadMyArticles = function() {
+        MyArticles.all($stateParams.categorieId)
+        .success(function(articles){
+        $scope.articles = [];
+        for(var i = 0; i < articles.length ; i++) {
+           $scope.articles.push({id: articles[i].article_Id, name: articles[i].name,
+           description: articles[i].description, src: serviceURL + articles[i].image});
+        }
+    });
+    };
     
     
-  $scope.remove = function(article) {
-    Articles.remove(article);
+  $scope.remove = function(articleId) {
+      console.log(articleId);
+    MyArticles.remove(articleId);
   };
   
 })

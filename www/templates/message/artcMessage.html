@@ -1,22 +1,24 @@
-<ion-view  view-title="Message">
+<ion-view ng-class="" view-title="Message">
     <ion-content >
         <!--    <h1>Put Article</h1>-->
         <form name="sendmsg" ng-submit="doartcmessagePost()" novalidate>
             <div class="list">
                 <label class="item item-input">
                     <span class="input-label">Your Object here</span>
-                    <input type="text" name="object" ng-model="postMsgData.object" required="yes"/>
+                    <input type="text" name="object" ng-model="postMsgData.object" 
+                           required="yes" placeholder="insert Object"/>
                 </label>
-                <label>
+                <label class="error">
                <div ng-messages="sendmsg.object.$error" style="color:red" role="alert" ng-if="sendmsg.$submitted">
                     <div ng-message="required">Object required</div>
                 </div> 
             </label>
                 <label class="item item-input">
                     <span class="input-label">Your Message here</span>
-                    <textarea type="text" name="textmsg" ng-model="postMsgData.msgText" required="yes"></textarea>
+                    <textarea type="text" name="textmsg" ng-model="postMsgData.msgText" 
+                              required="yes" placeholder="insert Message"></textarea>
                 </label>
-                <label>
+                <label class="error">
                <div ng-messages="sendmsg.textmsg.$error" style="color:red" role="alert" ng-if="sendmsg.$submitted">
                     <div ng-message="required">Message required</div>
                 </div> 

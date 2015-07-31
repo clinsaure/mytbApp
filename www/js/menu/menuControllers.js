@@ -5,28 +5,30 @@ var serviceURL = "http://localhost:81/tbServer/";
 var angular;
 
 angular.module('starter.menu.controllers', ['starter.signUp.controllers',
-        'starter.article.controllers','starter.message.controllers','starter.signIn.controllers'])
+        'starter.article.controllers','starter.message.controllers',
+        'starter.signIn.controllers','starter.wishlist.controllers'])
 
-.controller('AppCtrl', function($scope, $ionicModal , $state) {
+.controller('AppCtrl', function($scope, $ionicModal , $state, ArticlesMenu) {
     
-    if(sessionStorage.getItem("username") !== null){
-       $("#titelUname").text("Hallo " + sessionStorage.getItem("username")).css("color", "green");
-       $scope.showpostArticle = true;
-       $scope.showMail = true;
-       $scope.showMyArticles = true;
-       $scope.showPostArticle = true;
-       $scope.showMyWishList = true;
-       $scope.showPostWishList = true;
-    }else{
-        $("#titelUname").text("Hallo Gast").css("color", "green");
-        $scope.showpostArticle = false;
-        $scope.showMail = false;
-        $scope.showMyArticles = false;
-        $scope.showPostArticle = false;
-        $scope.showMyWishList = false;
-        $scope.showPostWishList = false;
-    }
-    
+//    $scope.loadUserData = function () {
+        if (sessionStorage.getItem("username") !== null) {
+            $("#titelUname").text("Hallo " + sessionStorage.getItem("username")).css("color", "green");
+            $scope.showpostArticle = true;
+            $scope.showMail = true;
+            $scope.showMyArticles = true;
+            $scope.showPostArticle = true;
+            $scope.showMyWishList = true;
+            $scope.showPostWishList = true;
+        } else {
+            $("#titelUname").text("Hallo Gast").css("color", "green");
+            $scope.showpostArticle = false;
+            $scope.showMail = false;
+            $scope.showMyArticles = false;
+            $scope.showPostArticle = false;
+            $scope.showMyWishList = false;
+            $scope.showPostWishList = false;
+        }
+//    };
     
     $scope.articles = function(){
         $state.go('app.articles');
@@ -38,37 +40,19 @@ angular.module('starter.menu.controllers', ['starter.signUp.controllers',
         $state.go('app.secure');
     };
     
-})
-//Articles
-.controller('ArticlesCtrl', function($scope, $stateParams, Articles) {
-    $scope.loadArticles = function() {
-        Articles.all($stateParams.categorieId)
-        .success(function(articles){
-//       $scope.articles = articles;
-        $scope.articles = [];
-        for(var i = 0; i < articles.length ; i++) {
-           $scope.articles.push({id: articles[i].article_Id, name: articles[i].name,
-           description: articles[i].description, src: serviceURL + articles[i].image});
-        }
-    });
-    };
-    
-    
-  $scope.remove = function(article) {
-    Articles.remove(article);
-  };
-  
-  $scope.loadImages = function() {
-      Articles.all()
+    $scope.loadImages = function() {
+      ArticlesMenu.all()
       .success(function(images){
             $scope.images = [];
         for(var i = images.length -10; i < images.length; i++) {
             $scope.images.push({id: images[i].article_Id, src: serviceURL + images[i].image});
-//            console.log(images[i]);
         }
       });
     };
+    
 })
+
+
 ;
 
 

@@ -1,20 +1,31 @@
-<ion-view view-title="SignIn">
-  <ion-header-bar>
-    <h1 class="title">Login</h1>
-<!--    <div class="buttons">
-      <button class="button button-clear" ng-click="closeLogin()">Close</button>
-    </div>-->
-  </ion-header-bar>
+<ion-view ng-class="" view-title="Sign In">
+    <ion-header-bar>
+        <h1 class="title">Login</h1>
+        <!--    <div class="buttons">
+              <button class="button button-clear" ng-click="closeLogin()">Close</button>
+            </div>-->
+    </ion-header-bar>
     <ion-content>
         <form name="signInForm" novalidate>
             <div class="list">
                 <label class="item item-input">
                     <span class="input-label">E-mail</span>
-                    <input type="text" id="logintextE" ng-model="loginData.email">
+                    <input type="text" id="logintextE" name="email" required="yes" ng-model="loginData.email">
+                </label>
+                <label class="error">
+                    <div ng-messages="signInForm.email.$error" style="color:red" role="alert" ng-if="signInForm.$submitted">
+                        <div ng-message="required">E-mail required</div>
+                        <div ng-message="minlength">Not Valid E-mail</div>
+                    </div> 
                 </label>
                 <label class="item item-input">
                     <span class="input-label">Password</span>
-                    <input type="password" id="logintextP" ng-model="loginData.password">
+                    <input type="password" id="logintextP" name="password" required="yes" ng-model="loginData.password">
+                </label>
+                <label class="error">
+                    <div ng-messages="signInForm.password.$error" style="color:red" role="alert" ng-if="signInForm.$submitted">
+                        <div ng-message="required">Password required</div>
+                    </div> 
                 </label>
                 <label class="item item-input">
                     <span class="input-label">Remember Credential</span>
@@ -25,23 +36,24 @@
                         </div>
                     </label>
                 </label>
+                <!--                <label class="item">
+                                    <span id="loginMsg"></span>   
+                                </label>-->
                 <label class="item">
-                    <span id="loginMsg"></span>   
+                    <button class="button button-block button-positive" ng-click="doLogin()" type="submit">Sign In</button>
                 </label>
-                <label class="item">
-                    <button class="button button-block button-positive" ng-click="doLogin()" type="submit">Log in</button>
-                </label>
-<!--                <div class="padding" ng-controller="LoginGoogleCtrl">
-                    <button ng-click="login()" class="button button-block button-stable">Log In Google</button>
-                </div>-->
-                <label class="item">
-                    <button ng-click="signUp()" class="button button-block button-positive">
-                        Sign Up
-                    </button>
-                </label>
+                <!--                <div class="padding" ng-controller="LoginGoogleCtrl">
+                                    <button ng-click="login()" class="button button-block button-stable">Log In Google</button>
+                                </div>-->
             </div>
         </form>
+
+        <label class="item">
+            <button ng-click="signUp()" class="button button-block button-positive">
+                Sign Up
+            </button>
+        </label>
     </ion-content>
-<!--</ion-modal-view>-->
+    <!--</ion-modal-view>-->
 </ion-view>
 

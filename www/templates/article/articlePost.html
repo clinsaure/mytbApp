@@ -13,15 +13,21 @@ and open the template in the editor.
 
             <label class="item item-input">
                 <span class="input-label">Categories</span>
-                <select ng-model="articlePostData.catName">
-                    <option  ng-repeat="cat in categories">{{cat.name}}</option>
+                <select ng-model="articlePostData.catName" name="categorie" required="yes">
+                    <option  ng-repeat="cat in categories" >{{cat.name}}</option>
                 </select> 
+            </label>
+            <label class="error">
+               <div ng-messages="formInfo.categorie.$error" style="color:red" role="alert" ng-if="formInfo.$submitted">
+                    <div ng-message="required">Categorie required</div>
+                </div> 
             </label>
             <label class="item item-input">
                 <span class="input-label">Name</span>
-                <input type="text" ng-model="articlePostData.name" name="name" required="yes" minlength="5">
+                <input type="text" ng-model="articlePostData.name" name="name" 
+                       required="yes" minlength="5" placeholder="insert Name">
             </label>
-            <label>
+            <label class="error">
                <div ng-messages="formInfo.name.$error" style="color:red" role="alert" ng-if="formInfo.$submitted">
                     <div ng-message="required">Name required</div>
                     <div ng-message="minlength">Name to long</div>
@@ -31,7 +37,7 @@ and open the template in the editor.
             
             <label class="item item-input">
                 <span class="input-label">Description</span>
-                <textarea type="text" ng-model="articlePostData.description"></textarea>
+                <textarea type="text" ng-model="articlePostData.description" placeholder="insert description"></textarea>
             </label>
             <label class="item item-input">
                 <span class="input-label">Img</span>

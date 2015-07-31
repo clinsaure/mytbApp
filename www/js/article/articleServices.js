@@ -9,8 +9,10 @@ var angular;
 
 var articlesItem,
         categoriesItem,
-        articleCatItem;
+        articleCatItem,
+        myArticlesItem;
 var responseItem;
+var alertPopup;
 
 //angular.module('starter.article.services', ['ngMessages'])
 angular.module('starter.article.services', ['ngResource'])
@@ -18,7 +20,7 @@ angular.module('starter.article.services', ['ngResource'])
 
 .factory('Articles', function($http) {
   // Might use a resource here that returns a JSON array
-$http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+//$http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
   // Some fake testing data      
 var _articles = function() {
 
@@ -40,7 +42,7 @@ var _articles = function() {
     },
     
     get: function(articleId) {
-//        console.log("arrivé");
+        console.log("arrivé Articles");
       for (var i = 0; i < articlesItem.length; i++) {
         if (articlesItem[i].article_Id === articleId) {
           return articlesItem[i];
@@ -48,6 +50,65 @@ var _articles = function() {
       }
       return null;
     }
+  };
+})
+
+.factory('MyArticles', function($http, $ionicPopup, $window, $state) {
+  // Might use a resource here that returns a JSON array
+//$http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+ $http.defaults.headers.common['Authorization'] = sessionStorage.getItem("apikey");
+  // Some fake testing data      
+    var _myarticles = function() {
+
+        return $http.get(serviceURL + "articles" ,{
+            headers: 'Access-Control-Allow-Headers: Content-Type, x-xsrf-token',
+            isArray: true,
+            crossDomain : true
+        }).success(function(data) {
+                myArticlesItem = data;
+             });   
+    };
+    
+    var _deletarticle = function(id){
+        
+        $http.delete(serviceURL + "article/" + id).
+            
+        success(function (data, status, headers, config) {
+                    // this callback will be called asynchronously
+                    // when the response is available
+                    if (data.error === false) {
+                        alertPopup = $ionicPopup.alert({
+                            title:'Article',
+                            template: data.message
+                        });
+//                        $state.go('app.wishlist',{}, {reload:true});
+                        $window.location.reload(true);
+                        
+                    } else {
+                        alertPopup = $ionicPopup.alert({
+                            title:'Article',
+                            template: data.message
+                        });
+                        $state.go('app.myArticle');
+                    }
+                }).
+                error(function (data, status, headers, config) {
+                    alertPopup = $ionicPopup.alert({
+                            title:'Article',
+                            template: 'send wish failed please try again'
+                        });
+                        $state.go('app.myArticle');
+                });
+    };
+    
+
+  return {
+    all: _myarticles,
+//    get: getArticle,
+    remove: _deletarticle
+//            function(article) {
+//      articles.splice(articles.indexOf(article), 1);
+//    }
   };
 })
 
@@ -107,7 +168,7 @@ var articleCat = function(categorieId) {
   };
 })
 
-.factory('ArticlePost', function($http, $state){
+.factory('ArticlePost', function($http, $state, $ionicPopup, $window){
     $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
     var articlePost = function (articlePostData) {
         var catId;
@@ -125,14 +186,25 @@ var articleCat = function(categorieId) {
                     // this callback will be called asynchronously
                     // when the response is available
                     if (data.error === false) {
+                        alertPopup = $ionicPopup.alert({
+                                title:'Message',
+                                template: data.message
+                            });
+                            $window.location.reload(true);
                         $state.go('app.articles');
                     } else {
-                        $("#loginMsg").text(data.message).css("color", "red");
+                        alertPopup = $ionicPopup.alert({
+                                title:'Message',
+                                template: data.message
+                            });
                     }
                 }).
                 error(function (data, status, headers, config) {
-                    $("#loginMsg").text(data.message).css("color", "red");
-                    console.log("AJAX failed!");
+                    alertPopup = $ionicPopup.alert({
+                                title:'Message',
+                                template: data.message
+                            });
+
                 });
     };
 

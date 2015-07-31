@@ -9,42 +9,46 @@ var serviceURL = "http://localhost:81/tbServer/";
 var angular;
 var responseItem;
 var messagesItem;
+var alertPopup;
 
 angular.module('starter.user.services', ['ngMessages']),
 angular.module('starter.message.services', ['ngResource'])
 
-.factory('Messages', function ($http, $state, $resource, $ionicPopup) {
+.factory('Messages', function ($http, $state, $resource, $ionicPopup, $window) {
 
     $http.defaults.headers.common["Content-Type"] = "application/x-www-form-urlencoded";
     $http.defaults.headers.common['Authorization'] = sessionStorage.getItem("apikey");
     var newMsg = function (postMsgData) {
         var msgdata = "object=" + postMsgData.object + "&message=" + postMsgData.msgText ;
         // Simple POST request example (passing data) :
-        $http.post(serviceURL + "message/"+ sessionStorage.getItem("articleId"), msgdata).
-                success(function (data, status, headers, config) {
-                    // this callback will be called asynchronously
-                    // when the response is available
-                    if (data.error === false) {
-                        var alertPopup = $ionicPopup.alert({
-                            title:'Message',
-                            template: data.message
-                        });
-                        $state.go('app.articles');
-                    } else {
-                       var alertPopup = $ionicPopup.alert({
-                            title:'Message',
-                            template: data.message
-                        });
-                    }
-                }).
-                error(function (data, status, headers, config) {
-                    // called asynchronously if an error occurs
-                    // or server returns response with an error status.
-                    var alertPopup = $ionicPopup.alert({
-                            title:'Message',
-                            template: data.message
-                        });
-                });
+        if (postMsgData.object !== undefined || postMsgData.msgText !== undefined){
+            $http.post(serviceURL + "message/"+ sessionStorage.getItem("articleId"), msgdata).
+                    success(function (data, status, headers, config) {
+                        // this callback will be called asynchronously
+                        // when the response is available
+                        if (data.error === false) {
+                            alertPopup = $ionicPopup.alert({
+                                title:'Message',
+                                template: data.message
+                            });
+                            $window.location.reload(true);
+                            $state.go('app.articles');
+                        } else {
+                            alertPopup = $ionicPopup.alert({
+                                title:'Message',
+                                template: data.message
+                            });
+                        }
+                    }).
+                    error(function (data, status, headers, config) {
+                        // called asynchronously if an error occurs
+                        // or server returns response with an error status.
+                            alertPopup = $ionicPopup.alert({
+                                title:'Message',
+                                template: data.message
+                            });
+                    });
+            }
     };
     
     var _messages = function() {

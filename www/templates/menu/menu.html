@@ -1,4 +1,4 @@
-<ion-side-menus enable-menu-with-back-views="false">
+<ion-side-menus ng-class="" enable-menu-with-back-views="false">
 
     <ion-side-menu-content>
 
@@ -62,17 +62,17 @@
                 <ion-item nav-clear menu-close href="#/app/articles">
                     Articles
                 </ion-item>
-                <ion-item nav-clear menu-close href="#/app/articles" ng-show="showMyArticles">
+                <ion-item nav-clear menu-close href="#/app/myArticles" ng-show="showMyArticles">
                     My articles
                 </ion-item>
                 <ion-item nav-clear menu-close href="#/app/articlePost" ng-show="showPostArticle">
                     Post Article
                 </ion-item >
-                <ion-item nav-clear menu-close href="#/app/articles" ng-show="showMyWishList">
+                <ion-item nav-clear menu-close href="#/app/wishlist" ng-show="showMyWishList">
                     My Wish List
                 </ion-item>
-                <ion-item nav-clear menu-close href="#/app/articles" ng-show="showPostWishList">
-                    Post Wish Liste
+                <ion-item nav-clear menu-close href="#/app/wishlistPost" ng-show="showPostWishList">
+                    Post to Wish list
                 </ion-item>
             </ion-list>
         </ion-content>

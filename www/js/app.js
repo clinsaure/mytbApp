@@ -73,6 +73,7 @@ angular.module('starter', ['ionic', 'starter.menu.controllers', 'starter.menu.se
     views: {
       'menuContent': {
         templateUrl: "templates/home.html"
+//        controller: 'ArticlesMenuCtrl'
       }
     }
   })
@@ -93,6 +94,16 @@ angular.module('starter', ['ionic', 'starter.menu.controllers', 'starter.menu.se
     'menuContent': {
       templateUrl: "templates/article/articles.html",
       controller: 'ArticlesCtrl'
+    }
+  }
+})
+
+.state('app.myArticles', {
+  url: "/myArticles",
+  views: {
+    'menuContent': {
+      templateUrl: "templates/article/myArticles.html",
+      controller: 'MyArticlesCtrl'
     }
   }
 })
@@ -178,6 +189,25 @@ angular.module('starter', ['ionic', 'starter.menu.controllers', 'starter.menu.se
         }
     })
     
+    .state('app.wishlist', {
+        url:'/wishlist',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/wish/wishList.html',
+                controller: 'wishListsCtrl'
+            }
+        }
+    })
+    
+    .state('app.wishlistPost', {
+        url:'/wishlistPost',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/wish/postWish.html',
+                controller: 'wishPostCtrl'
+            }
+        }
+    })
   
     ;
   // if none of the above states are matched, use this as the fallback

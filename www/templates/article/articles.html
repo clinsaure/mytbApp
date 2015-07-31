@@ -1,4 +1,4 @@
-<ion-view view-title="Articles">
+<ion-view ng-class="" view-title="Articles">
     <ion-content ng-init="loadArticles()">
         <label class="item item-input">
             <i class="icon ion-search placeholder-icon"></i>
@@ -12,10 +12,13 @@
                 <img ng-src="{{article.src}}">
                 <h2>{{article.name}}</h2>
                 <p>{{article.description}}</p>
-                <!--        <p>{{article.id}}</p>-->
+                
                 <i class="icon ion-chevron-right icon-accessory">
-                    <p>{{article.id}}</p>
+<!--                    <p>{{article.id}}</p>-->
                 </i>
+ <!--               <i class="icon ion-chevron-right ion-trash-a">
+                    <p>{{article.id}}</p>
+                </i>-->
                 <!--        <ion-option-button class="button-assertive" ng-click="remove(article)">
                           Delete
                         </ion-option-button>-->
