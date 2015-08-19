@@ -1,13 +1,17 @@
 "use strict";
+/* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 
-var serviceURL = "http://localhost:81/tbServer/";
 var angular;
 
 angular.module('starter.message.controllers', ['starter.message.services'])
 
 //Messages
 .controller('MessagesCtrl', function($http, $scope, Messages) {
-    $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+//    $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
     
     $scope.loadMessages = function() {
         Messages.all()
@@ -23,15 +27,15 @@ angular.module('starter.message.controllers', ['starter.message.services'])
     
 })
 
-.controller('messagesCtrl', function ($scope, $http, $ionicPopup,$stateParams, Messages, $state) {
+.controller('messagesCtrl', function ($scope, $http, $ionicPopup,$stateParams, $log, Messages, $state) {
 
-$http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+//$http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
 
 //    // Form data for the post Message modal
     $scope.postMsgData = {};
     
     $scope.artTomsg = function(){
-        if(sessionStorage.getItem("username") !== null){
+        if(window.localStorage.getItem("username") !== null){
             $state.go('app.artcMessage');
         }else{
             var alertPopup = $ionicPopup.alert({
@@ -58,12 +62,16 @@ $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded
         }
     });
     };
+    
+    this.myMsg = function () {
+        $log.debug("messagesCtrl - loadMessages");
+    };
 
 })
 
 .controller('messageCtrl', function($http, $scope,$state, $stateParams, Messages) {  
 
-$http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+//$http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
 
 //sessionStorage.articleId = $stateParams.articleId;
     var selectMessage = Messages.get($stateParams.messageId);

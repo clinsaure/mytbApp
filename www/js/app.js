@@ -6,10 +6,19 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
 //angular.module('starter', ['ngMessages'])
-var angular;
-angular.module('starter', ['ionic', 'starter.menu.controllers', 'starter.menu.services', 'ngCordova','ngMessages'])
 
-.run(function($ionicPlatform) {
+var serviceURL = "http://localhost:81/tbServer/";
+//var serviceURL = "http://tbapp.kamdem-kenmogne.de/";
+
+var angular;
+angular.module('starter', ['ionic', 'starter.menu.controllers', 'starter.menu.services',
+      'ngCordova','ionic.service.core','ionic.service.push','ngMessages'])
+
+.run(function($ionicPlatform, $http, $rootScope) {
+   //send Apikey to server 
+  $http.defaults.headers.common['Authorization'] = window.localStorage.getItem("apikey");
+//  $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -20,8 +29,17 @@ angular.module('starter', ['ionic', 'starter.menu.controllers', 'starter.menu.se
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+
   });
 })
+
+.config(['$ionicAppProvider', function($ionicAppProvider){
+   $ionicAppProvider.identify({
+     app_id: '4f21f356',
+     api_key: '069b7e5d0455d629b323ed0e0bc325aa376847224c5ac10c',
+     dev_push: true
+   });    
+}])
 
 .config(function($httpProvider) {
       //Enable cross domain calls

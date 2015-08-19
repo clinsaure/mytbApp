@@ -5,11 +5,10 @@
  * and open the template in the editor.
  */
 
-var serviceURL = "http://localhost:81/tbServer/";
-
 var responseItem;
 var angular;
 var alertPopup;
+var myMsgItem;
 
 angular.module('starter.signIn.services', ['ngMessages']),
 angular.module('starter.signIn.services', ['ngResource'])
@@ -27,16 +26,17 @@ angular.module('starter.signIn.services', ['ngResource'])
                     // when the response is available
                     if (data.error === false) {
 //                        if (typeof (Storage) !== "undefined") {
-                            sessionStorage.username = data.username;
-                            sessionStorage.apikey = data.apiKey;
+                            window.localStorage.username = data.username;
+                            window.localStorage.apikey = data.apiKey;
 //                        }
+                        
                         alertPopup = $ionicPopup.alert({
                                 title:'Sign In',
                                 template: data.message
                             });
-                        $window.location.reload(true);    
-                        $state.go('app.home');
-                        
+                        _mymessage();    
+//                        $window.location.reload(true);
+//                        $state.go('app.home');
                     } else {
                         alertPopup = $ionicPopup.alert({
                                 title:'Sign In',
@@ -52,16 +52,33 @@ angular.module('starter.signIn.services', ['ngResource'])
                     // called asynchronously if an error occurs
                     // or server returns response with an error status.
                     alertPopup = $ionicPopup.alert({
-                                title:'Sign In',
-                                template: data.message
-                            });
-                            $state.go('app.signIn');
+
+                        title:'Sign In',
+                        template: data.message
+                    });
+                    $state.go('app.signIn');
                 });
             }
     };
+    
+    var _mymessage = function () {
+        $http.defaults.headers.common['Authorization'] = window.localStorage.getItem("apikey");
+        return $http.get(serviceURL + "messages", {
+//        headers: 'Access-Control-Allow-Headers: Content-Type, x-xsrf-token',
+            isArray: true,
+            crossDomain: true
+        })
+        .success(function (data) {
+            myMsgItem = data;
+            window.localStorage.mymsg = myMsgItem.length;
+            $window.location.reload(true);
+            $state.go('app.home');
+        });
+    };
 
     return {
-        signInUser: signInUser
+        signInUser: signInUser,
+        myMsg: _mymessage
     };
 })
 

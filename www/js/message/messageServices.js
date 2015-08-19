@@ -5,7 +5,6 @@
  * and open the template in the editor.
  */
 
-var serviceURL = "http://localhost:81/tbServer/";
 var angular;
 var responseItem;
 var messagesItem;
@@ -16,13 +15,14 @@ angular.module('starter.message.services', ['ngResource'])
 
 .factory('Messages', function ($http, $state, $resource, $ionicPopup, $window) {
 
-    $http.defaults.headers.common["Content-Type"] = "application/x-www-form-urlencoded";
-    $http.defaults.headers.common['Authorization'] = sessionStorage.getItem("apikey");
+    $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+    
     var newMsg = function (postMsgData) {
+       
         var msgdata = "object=" + postMsgData.object + "&message=" + postMsgData.msgText ;
         // Simple POST request example (passing data) :
         if (postMsgData.object !== undefined || postMsgData.msgText !== undefined){
-            $http.post(serviceURL + "message/"+ sessionStorage.getItem("articleId"), msgdata).
+            $http.post(serviceURL + "message/"+ window.localStorage.getItem("articleId"), msgdata).
                     success(function (data, status, headers, config) {
                         // this callback will be called asynchronously
                         // when the response is available
@@ -52,14 +52,14 @@ angular.module('starter.message.services', ['ngResource'])
     };
     
     var _messages = function() {
-
     return $http.get(serviceURL + "messages" ,{
-        headers: 'Access-Control-Allow-Headers: Content-Type, x-xsrf-token',
+//        headers: 'Access-Control-Allow-Headers: Content-Type, x-xsrf-token',
         isArray: true,
         crossDomain : true
     })
         .success(function(data) {
             messagesItem = data;
+            window.localStorage.mymsg = messagesItem.length;
          });   
 };
 

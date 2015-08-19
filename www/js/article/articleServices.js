@@ -4,7 +4,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-var serviceURL = "http://localhost:81/tbServer/";
+
 var angular;
 
 var articlesItem,
@@ -25,7 +25,7 @@ angular.module('starter.article.services', ['ngResource'])
 var _articles = function() {
 
     return $http.get(serviceURL + "articles" ,{
-        headers: 'Access-Control-Allow-Headers: Content-Type, x-xsrf-token',
+//        headers: 'Access-Control-Allow-Headers: Content-Type, x-xsrf-token',
         isArray: true,
         crossDomain : true
     })
@@ -42,7 +42,6 @@ var _articles = function() {
     },
     
     get: function(articleId) {
-        console.log("arrivé Articles");
       for (var i = 0; i < articlesItem.length; i++) {
         if (articlesItem[i].article_Id === articleId) {
           return articlesItem[i];
@@ -54,25 +53,25 @@ var _articles = function() {
 })
 
 .factory('MyArticles', function($http, $ionicPopup, $window, $state) {
-  // Might use a resource here that returns a JSON array
-//$http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
- $http.defaults.headers.common['Authorization'] = sessionStorage.getItem("apikey");
+
   // Some fake testing data      
     var _myarticles = function() {
 
-        return $http.get(serviceURL + "articles" ,{
-            headers: 'Access-Control-Allow-Headers: Content-Type, x-xsrf-token',
+        return $http.get(serviceURL + "article" ,{
+//            headers: 'Access-Control-Allow-Headers: Content-Type, x-xsrf-token',
             isArray: true,
             crossDomain : true
         }).success(function(data) {
                 myArticlesItem = data;
-             });   
+//                console.log( data);
+        }).error(function (data, status) {
+        console.log(status, data);
+        });  
     };
     
     var _deletarticle = function(id){
         
-        $http.delete(serviceURL + "article/" + id).
-            
+        $http.delete(serviceURL + "article/" + id).   
         success(function (data, status, headers, config) {
                     // this callback will be called asynchronously
                     // when the response is available
@@ -89,15 +88,15 @@ var _articles = function() {
                             title:'Article',
                             template: data.message
                         });
-                        $state.go('app.myArticle');
+                        $state.go('app.myArticles');
                     }
                 }).
                 error(function (data, status, headers, config) {
                     alertPopup = $ionicPopup.alert({
                             title:'Article',
-                            template: 'send wish failed please try again'
+                            template: 'Delete article failed please try again'
                         });
-                        $state.go('app.myArticle');
+                        $state.go('app.myArticles');
                 });
     };
     
@@ -106,9 +105,6 @@ var _articles = function() {
     all: _myarticles,
 //    get: getArticle,
     remove: _deletarticle
-//            function(article) {
-//      articles.splice(articles.indexOf(article), 1);
-//    }
   };
 })
 
@@ -119,7 +115,7 @@ var _articles = function() {
 var categories = function() {
     
     return $http.get(serviceURL + "categories" ,{
-        headers: 'Access-Control-Allow-Headers: Content-Type, x-xsrf-token',
+//        headers: 'Access-Control-Allow-Headers: Content-Type, x-xsrf-token',
         isArray: true,
         crossDomain : true
     })
@@ -153,7 +149,7 @@ var categories = function() {
 var articleCat = function(categorieId) {
     
     return $http.get(serviceURL + "articleCat/" + categorieId ,{
-        headers: 'Access-Control-Allow-Headers: Content-Type, x-xsrf-token',
+//        headers: 'Access-Control-Allow-Headers: Content-Type, x-xsrf-token',
         isArray: true,
         crossDomain : true
     })
@@ -169,7 +165,7 @@ var articleCat = function(categorieId) {
 })
 
 .factory('ArticlePost', function($http, $state, $ionicPopup, $window){
-    $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+    
     var articlePost = function (articlePostData) {
         var catId;
         angular.forEach(categoriesItem, function(value, key){
@@ -179,9 +175,9 @@ var articleCat = function(categorieId) {
         });
 
         var articledata = "categorie_Id=" + catId + "&name=" + articlePostData.name +
-                "&description" + articlePostData.description + "&image" + articlePostData.image;
+                "&description=" + articlePostData.description + "&image=" + articlePostData.image;
         // Simple POST request example (passing data) :
-        $http.post(serviceURL + "//article", articledata).
+        $http.post(serviceURL + "article", articledata).
                 success(function (data, status, headers, config) {
                     // this callback will be called asynchronously
                     // when the response is available

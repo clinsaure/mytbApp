@@ -4,9 +4,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-var serviceURL = "http://localhost:81/tbServer/";
-var angular;
 
+var angular;
 var wishlistsItem;
 
 
@@ -16,12 +15,10 @@ angular.module('starter.wishlist.services', ['ngResource'])
 
 .factory('wishLists', function ($http, $state, $ionicPopup,$window) {
     // Might use a resource here that returns a JSON array
-    $http.defaults.headers.common['Authorization'] = sessionStorage.getItem("apikey");
     // Some fake testing data      
     var _wishlist = function () {
-
         return $http.get(serviceURL + "wishlist", {
-            headers: 'Access-Control-Allow-Headers: Content-Type, x-xsrf-token',
+//            headers: 'Access-Control-Allow-Headers: Content-Type, x-xsrf-token',
             isArray: true,
             crossDomain: true
         })
@@ -31,9 +28,7 @@ angular.module('starter.wishlist.services', ['ngResource'])
     };
     
     var _deletwish = function(id){
-        
-        $http.delete(serviceURL + "wishlist/" + id).
-            
+        $http.delete(serviceURL + "wishlist/" + id).   
         success(function (data, status, headers, config) {
                     // this callback will be called asynchronously
                     // when the response is available
@@ -73,8 +68,7 @@ angular.module('starter.wishlist.services', ['ngResource'])
 })
 
 .factory('WishPost', function($http, $state, $ionicPopup, $window){
-    $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
-    $http.defaults.headers.common['Authorization'] = sessionStorage.getItem("apikey");
+    
     var wishPost = function (wishPostData) {
         
         var wishdata = "searchText=" + wishPostData.wishText;

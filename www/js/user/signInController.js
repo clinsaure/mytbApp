@@ -4,18 +4,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-var serviceURL = "http://localhost:81/tbServer/";
+
 var angular;
 
 angular.module('starter.signIn.controllers', ['starter.signIn.services'])
 
-.controller('SignInCtrl', function($scope, $ionicModal, SignIn, $http, $state) { 
+.controller('SignInCtrl', function($scope, $ionicModal, SignIn, $http, $state, $rootScope, $ionicPush) { 
+    
     // Form data for the login modal
     $scope.loginData = {};
-//console.log($scope.loginData);
     // Perform the login action when the user submits the login form
     $scope.doLogin = function () {
-        SignIn.signInUser($scope.loginData);
+        SignIn.signInUser($scope.loginData).then(function(){
+            console.log("reusit a se connecter");
+        });
         // Simulate a login delay. Remove this and replace with your login
         // code if using a login system
         //    $timeout(function() {

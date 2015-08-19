@@ -4,19 +4,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-//var serviceURL = "http://tbapp.kamdem-kenmogne.de/";
-var serviceURL = "http://localhost:81/tbServer/";
+
 var angular;
 var articlesItem,
         categoriesItem,
         articleCatItem;
 var responseItem;
 
+
 angular.module('starter.menu.services', ['ngMessages']),
 angular.module('starter.menu.services', ['ngResource'])
 
 
-.factory('ArticlesMenu', function($http) {
+.factory('ArticlesMenu', function($http, $window) {
   // Might use a resource here that returns a JSON array
   // Some fake testing data      
 var _articles = function() {

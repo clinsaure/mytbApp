@@ -1,13 +1,17 @@
 "use strict";
+/* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 
-var serviceURL = "http://localhost:81/tbServer/";
 var angular;
 
 angular.module('starter.article.controllers', ['starter.article.services'])
 
 //Articles
 .controller('ArticlesCtrl', function($http, $scope, $stateParams, Articles) {
-    $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+//    $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
     $scope.loadArticles = function() {
         Articles.all($stateParams.categorieId)
         .success(function(articles){
@@ -22,7 +26,7 @@ angular.module('starter.article.controllers', ['starter.article.services'])
 
 //Articles
 .controller('MyArticlesCtrl', function($http, $scope, $stateParams, MyArticles) {
-    $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+//    $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
     $scope.loadMyArticles = function() {
         MyArticles.all($stateParams.categorieId)
         .success(function(articles){
@@ -36,7 +40,6 @@ angular.module('starter.article.controllers', ['starter.article.services'])
     
     
   $scope.remove = function(articleId) {
-      console.log(articleId);
     MyArticles.remove(articleId);
   };
   
@@ -44,9 +47,9 @@ angular.module('starter.article.controllers', ['starter.article.services'])
 
 .controller('ArticleCtrl', function($http, $scope,$state, $stateParams, Articles) {  
 
-$http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+//$http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
 //localStorage.articleId = $stateParams.articleId;
-sessionStorage.articleId = $stateParams.articleId;
+window.localStorage.articleId = $stateParams.articleId;
     var selectArticle = Articles.get($stateParams.articleId);
     $scope.article = selectArticle;
                 $scope.articles = [];
@@ -68,6 +71,7 @@ sessionStorage.articleId = $stateParams.articleId;
     $scope.doarticlePost = function () {
 //        console.log("controller data", $scope.articlePostData);
         ArticlePost.articlePost($scope.articlePostData);
+        console.log($scope.articlePostData);
     };
     
     $scope.getCategories = function(){

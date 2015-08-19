@@ -50,14 +50,18 @@
                             <i class="icon ion-key"></i>
                           Login
                         </ion-item>-->
-                <ion-item class="item item-icon-left" nav-clear menu-close href="#/app/signIn">
-                    <i class="icon ion-key"></i>
-                    Login
+                <ion-item class="item item-icon-left" nav-clear menu-close href="#/app/signIn" ng-show="showLogin">
+                    <i class="icon ion-log-in"></i>
+                    Log In
+                </ion-item>
+                <ion-item class="item item-icon-left" nav-clear menu-close ng-click="logout()" ng-show="showLogon">
+                    <i class="icon ion-log-out"></i>
+                    Log Out
                 </ion-item>
                 <ion-item  class="item item-icon-left" nav-clear menu-close href="#/app/messages" ng-show="showMail">
                     <i class="icon ion-email"></i>
                     Check mail
-                    <span class="badge badge-assertive">0</span>
+                    <span class="badge badge-assertive" id="msgCount"></span>
                 </ion-item>
                 <ion-item nav-clear menu-close href="#/app/articles">
                     Articles

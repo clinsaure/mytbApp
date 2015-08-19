@@ -4,7 +4,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-var serviceURL = "http://localhost:81/tbServer/";
+
 var angular;
 
 angular.module('starter.wishlist.controllers', ['starter.wishlist.services'])
@@ -12,7 +12,7 @@ angular.module('starter.wishlist.controllers', ['starter.wishlist.services'])
 //Articles
 .controller('wishListsCtrl', function($http, $scope, $stateParams, wishLists) {
 
-    $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+//    $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
     $scope.loadWishLists = function() {
         wishLists.all()
         .success(function(wishList){
@@ -34,7 +34,7 @@ angular.module('starter.wishlist.controllers', ['starter.wishlist.services'])
 
 .controller('wishPostCtrl', function($http, $scope, WishPost) {  
     // Form data for the login modal
-//    $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+    $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
     $scope.wishPostData = {};
     // Perform the login action when the user submits the login form
     $scope.dowishlistPost = function () {
