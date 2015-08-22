@@ -15,13 +15,14 @@ angular.module('starter.message.services', ['ngResource'])
 
 .factory('Messages', function ($http, $state, $resource, $ionicPopup, $window) {
 
-    $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+//    $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+//    $http.defaults.headers.common['Authorization'] = sessionStorage.getItem("apikey");
     
     var newMsg = function (postMsgData) {
        
         var msgdata = "object=" + postMsgData.object + "&message=" + postMsgData.msgText ;
         // Simple POST request example (passing data) :
-        if (postMsgData.object !== undefined || postMsgData.msgText !== undefined){
+        if (postMsgData.object !== undefined && postMsgData.msgText !== undefined){
             $http.post(serviceURL + "message/"+ window.localStorage.getItem("articleId"), msgdata).
                     success(function (data, status, headers, config) {
                         // this callback will be called asynchronously

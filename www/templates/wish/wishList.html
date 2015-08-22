@@ -7,9 +7,9 @@
         </label>
         <ion-list>
             <ion-item class="item-remove-animate item-icon-right" 
-                      ng-repeat="wish in wishList| filter:search">
+                      ng-repeat="wish in wishList| filter:search| orderBy:'-date'">
                 <h2>{{wish.searchText}}</h2>
-                <p>{{wish.date}}</p>
+                <h5>{{wish.date}}</h5>
 
                 <i class="icon ion-chevron-right ion-trash-a" ng-click="remove({{wish.id}})">
 <!--                    <p>{{wish.id}}</p>-->

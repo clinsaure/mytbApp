@@ -5,7 +5,7 @@
             <input type="search" placeholder="Search" ng-model="search">
         </label>
         <ion-list>
-            <ion-item class="item-remove-animate item-icon-right" ng-repeat="category in categories| filter:search | orderBy:orderProp" type="item-text-wrap" href="#/app/articlesCat/{{category.categorie_Id}}">
+            <ion-item class="item-remove-animate item-icon-right" ng-repeat="category in categories| filter:search" type="item-text-wrap" href="#/app/articlesCat/{{category.categorie_Id}}">
                 <h2>{{category.name}}</h2>
                 <p>{{category.description}}</p>
                 <i class="icon ion-chevron-right icon-accessory"></i>

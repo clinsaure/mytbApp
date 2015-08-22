@@ -7,20 +7,21 @@
 
 var angular;
 
-var articlesItem,
-        categoriesItem,
-        articleCatItem,
-        myArticlesItem;
+var articlesItem;
+var categoriesItem;
+var articleCatItem;
+var myArticlesItem;
+var wishItem;
 var responseItem;
 var alertPopup;
+var articleName;
 
 //angular.module('starter.article.services', ['ngMessages'])
 angular.module('starter.article.services', ['ngResource'])
 
 
 .factory('Articles', function($http) {
-  // Might use a resource here that returns a JSON array
-//$http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+
   // Some fake testing data      
 var _articles = function() {
 
@@ -75,29 +76,29 @@ var _articles = function() {
         success(function (data, status, headers, config) {
                     // this callback will be called asynchronously
                     // when the response is available
-                    if (data.error === false) {
-                        alertPopup = $ionicPopup.alert({
-                            title:'Article',
-                            template: data.message
-                        });
-//                        $state.go('app.wishlist',{}, {reload:true});
-                        $window.location.reload(true);
-                        
-                    } else {
-                        alertPopup = $ionicPopup.alert({
-                            title:'Article',
-                            template: data.message
-                        });
-                        $state.go('app.myArticles');
-                    }
-                }).
-                error(function (data, status, headers, config) {
-                    alertPopup = $ionicPopup.alert({
-                            title:'Article',
-                            template: 'Delete article failed please try again'
-                        });
-                        $state.go('app.myArticles');
+            if (data.error === false) {
+                alertPopup = $ionicPopup.alert({
+                    title:'Article',
+                    template: data.message
                 });
+    //                        $state.go('app.wishlist',{}, {reload:true});
+                $window.location.reload(true);
+
+            } else {
+                alertPopup = $ionicPopup.alert({
+                    title:'Article',
+                    template: data.message
+                });
+                $state.go('app.myArticles');
+            }
+        }).
+        error(function (data, status, headers, config) {
+            alertPopup = $ionicPopup.alert({
+                    title:'Article',
+                    template: 'Delete article failed please try again'
+                });
+                $state.go('app.myArticles');
+        });
     };
     
 
@@ -165,8 +166,8 @@ var articleCat = function(categorieId) {
 })
 
 .factory('ArticlePost', function($http, $state, $ionicPopup, $window){
-    
-    var articlePost = function (articlePostData) {
+    var _articlePost = function (articlePostData) {
+        articleName = articlePostData.name;
         var catId;
         angular.forEach(categoriesItem, function(value, key){
             if(value.name === articlePostData.catName){
@@ -178,34 +179,66 @@ var articleCat = function(categorieId) {
                 "&description=" + articlePostData.description + "&image=" + articlePostData.image;
         // Simple POST request example (passing data) :
         $http.post(serviceURL + "article", articledata).
-                success(function (data, status, headers, config) {
-                    // this callback will be called asynchronously
-                    // when the response is available
-                    if (data.error === false) {
-                        alertPopup = $ionicPopup.alert({
-                                title:'Message',
-                                template: data.message
-                            });
-                            $window.location.reload(true);
-                        $state.go('app.articles');
-                    } else {
-                        alertPopup = $ionicPopup.alert({
-                                title:'Message',
-                                template: data.message
-                            });
-                    }
-                }).
-                error(function (data, status, headers, config) {
+            success(function (data, status, headers, config) {
+                // this callback will be called asynchronously
+                // when the response is available
+                if (data.error === false) {
                     alertPopup = $ionicPopup.alert({
-                                title:'Message',
-                                template: data.message
-                            });
+                            title:'Message',
+                            template: data.message
+                        });
+//                            $window.location.reload(true);
+                    $state.go('app.articles');
+                    _getWish();
 
-                });
+                } else {
+                    alertPopup = $ionicPopup.alert({
+                            title:'Message',
+                            template: data.message
+                        });
+                        articleName = null;
+                }
+            }).error(function (data, status, headers, config) {
+                alertPopup = $ionicPopup.alert({
+                        title:'Message',
+                        template: data.message
+                    });
+                    articleName = null;
+            });
+    };
+    
+    var _getWish = function(){
+        return $http.get(serviceURL + "wishlists" ,{
+//        headers: 'Access-Control-Allow-Headers: Content-Type, x-xsrf-token',
+        isArray: true,
+        crossDomain : true
+        })
+        .success(function(data) {
+            wishItem = data;
+            console.log(data);
+            angular.forEach(data, function(value, key){
+            if(value.searchText === articleName){
+                console.log(value.user_Id);
+                _sendmsg(value.user_Id);
+                } 
+            });
+            
+        });   
+    };
+    
+    var _sendmsg = function(user_Id){
+        var msgdata = "message= das konnten Sie interessiert" ;
+        $http.post(serviceURL + "messagepush/"+ user_Id, msgdata).
+            success(function (data, status, headers, config) {
+                if (data.error === false) {
+                    $state.go('app.articles');
+                } 
+            });
+
     };
 
     return {
-        articlePost: articlePost
+        articlePost: _articlePost
     };
 })
 ;

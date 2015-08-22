@@ -6,6 +6,7 @@
         </label>
         <div class="button-bar icon-left"  ng-controller="AppCtrl" ng-init="loadUserData()">
             <button ng-click="mytbapp()" class="button button-balanced icon-left ion-android-person">Service</button>
+            <button ng-click="mytest()" ng-if="identified" class="button button-balanced icon-left ion-android-person">Test</button>
             <button ng-click="articles()" class="button button-ligth icon-left ion-pricetag">Articles</button>
             <button ng-click="categorie()" class="button button-balanced icon-left ion-android-apps">Categorie</button>
         </div>
@@ -15,12 +16,12 @@
             </div>
             <div class="item item-body">
                 
-               <div class="row" ng-repeat="image in images" ng-if="$index % 2 === 0">
+               <div class="row" ng-repeat="image in images| orderBy:-id" ng-if="$index % 2 === 0">
                      <div class="col col-50" ng-if="$index < images.length">
-                         <a href="#/app/articles/{{images[$index].id}}"><img ng-src="{{images[$index].src}}" width="100%" /></a>
+                         <a href="#/app/articles/{{images[$index + 1].id}}"><img ng-src="{{images[$index + 1].src}}" width="100%" /></a>
                     </div>
                     <div class="col col-50" ng-if="$index + 1 < images.length">
-                        <a href="#/app/articles/{{images[$index + 1].id}}"><img ng-src="{{images[$index + 1].src}}" width="100%"/></a>
+                        <a href="#/app/articles/{{images[$index].id}}"><img ng-src="{{images[$index].src}}" width="100%"/></a>
                     </div>
                 </div> 
             </div>

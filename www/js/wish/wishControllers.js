@@ -37,9 +37,10 @@ angular.module('starter.wishlist.controllers', ['starter.wishlist.services'])
     $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
     $scope.wishPostData = {};
     // Perform the login action when the user submits the login form
-    $scope.dowishlistPost = function () {
-//        console.log("controller data", $scope.articlePostData);
-        WishPost.wishPost($scope.wishPostData);
+    $scope.dowishlistPost = function (formInfo) {
+        if(formInfo.$valid){
+            WishPost.wishPost($scope.wishPostData);
+        }
     };
 })
 

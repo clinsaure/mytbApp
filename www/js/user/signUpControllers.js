@@ -15,13 +15,15 @@ angular.module('starter.signUp.controllers', ['starter.signUp.services'])
     $scope.loginData = {};
 console.log($scope.loginData);
     // Perform the login action when the user submits the login form
-    $scope.doLogin = function () {
-        SignIn.signInUser($scope.loginData);
+    $scope.doLogin = function (signupForm) {
+        if(signupForm.$valid){
+            SignIn.signInUser($scope.loginData);
         // Simulate a login delay. Remove this and replace with your login
         // code if using a login system
         //    $timeout(function() {
 //      $scope.closeLogin();
 //    }, 1000);
+        }
     };
 
     $scope.signUp = function () {

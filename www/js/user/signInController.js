@@ -14,15 +14,16 @@ angular.module('starter.signIn.controllers', ['starter.signIn.services'])
     // Form data for the login modal
     $scope.loginData = {};
     // Perform the login action when the user submits the login form
-    $scope.doLogin = function () {
-        SignIn.signInUser($scope.loginData).then(function(){
-            console.log("reusit a se connecter");
+    $scope.doLogin = function (signInForm) {
+        if(signInForm.$valid){
+            SignIn.signInUser($scope.loginData).then(function(){
         });
         // Simulate a login delay. Remove this and replace with your login
         // code if using a login system
         //    $timeout(function() {
 //      $scope.closeLogin();
 //    }, 1000);
+        }
     };
 
     $scope.signUp = function () {

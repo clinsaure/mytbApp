@@ -11,13 +11,23 @@ var serviceURL = "http://localhost:81/tbServer/";
 //var serviceURL = "http://tbapp.kamdem-kenmogne.de/";
 
 var angular;
-angular.module('starter', ['ionic', 'starter.menu.controllers', 'starter.menu.services',
-      'ngCordova','ionic.service.core','ionic.service.push','ngMessages'])
+angular.module('starter', ['ionic', 'ngCordova','ionic.service.core','ionic.service.push','ngMessages',
+    'starter.menu.controllers', 'starter.menu.services',])
+
+.config(['$ionicAppProvider', function($ionicAppProvider){
+   $ionicAppProvider.identify({
+     app_id: '4f21f356',
+     api_key: '069b7e5d0455d629b323ed0e0bc325aa376847224c5ac10c',
+     dev_push: true,
+     gcm_id:'AIzaSyBvr6_x9GOXZSHx1cf-DTzJNAe3A6ODO10'
+   });    
+}])
 
 .run(function($ionicPlatform, $http, $rootScope) {
    //send Apikey to server 
   $http.defaults.headers.common['Authorization'] = window.localStorage.getItem("apikey");
 //  $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+//  $http.defaults.headers.post["Content-Type"] = "X-Ionic-Application-Id: 4f21f356";
 
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -31,15 +41,8 @@ angular.module('starter', ['ionic', 'starter.menu.controllers', 'starter.menu.se
     }
 
   });
-})
 
-.config(['$ionicAppProvider', function($ionicAppProvider){
-   $ionicAppProvider.identify({
-     app_id: '4f21f356',
-     api_key: '069b7e5d0455d629b323ed0e0bc325aa376847224c5ac10c',
-     dev_push: true
-   });    
-}])
+})
 
 .config(function($httpProvider) {
       //Enable cross domain calls
@@ -47,6 +50,8 @@ angular.module('starter', ['ionic', 'starter.menu.controllers', 'starter.menu.se
 
       //Remove the header used to identify ajax call  that would prevent CORS from working
       delete $httpProvider.defaults.headers.common['X-Requested-With'];
+       //send Apikey to server 
+  
   })
 
 .config(function($stateProvider, $urlRouterProvider) {

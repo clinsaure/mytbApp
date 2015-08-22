@@ -6,12 +6,13 @@
         </label>
         <ion-list >
             <ion-item class="item-remove-animate item-avatar-left item-icon-right" 
-                      ng-repeat="article in articles| filter:search" 
-                      type="item-text-wrap" href="#/app/articles/{{articles[$index].id}}">
-                <!--<img ng-src="http://localhost:81/tauschboerse-server/{{article.image}}">-->
+                      ng-repeat="article in articles| filter:search | orderBy:'-date'" 
+                      type="item-text-wrap" href="#/app/articles/{{article.id}}">
                 <img ng-src="{{article.src}}">
                 <h2>{{article.name}}</h2>
                 <p>{{article.description}}</p>
+                <h5>{{article.date}}</h5>
+                
                 
                 <i class="icon ion-chevron-right icon-accessory">
 <!--                    <p>{{article.id}}</p>-->

@@ -7,8 +7,8 @@
         </label>
         <ion-list >
             <ion-item class="item-remove-animate item-icon-right" 
-                      ng-repeat="message in messages| filter:search" 
-                      type="item-text-wrap" href="#/app/messages/{{messages[$index].id}}">
+                      ng-repeat="message in messages| filter:search| orderBy:'-date'" 
+                      type="item-text-wrap" href="#/app/messages/{{message.id}}">
                 <h2>{{message.sender}}</h2>
                 <h2>{{message.object}}</h2>
                 

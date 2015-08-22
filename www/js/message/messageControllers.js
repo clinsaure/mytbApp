@@ -46,8 +46,10 @@ angular.module('starter.message.controllers', ['starter.message.services'])
         }
     };
 
-    $scope.doartcmessagePost = function () {
-        Messages.newMsg($scope.postMsgData);  
+    $scope.doartcmessagePost = function (sendmsg) {
+        if(sendmsg.$valid) {
+            Messages.newMsg($scope.postMsgData);
+        }
     };
     
     $scope.loadMessages = function() {

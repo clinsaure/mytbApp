@@ -6,10 +6,11 @@
         </label>
         <ion-list >
             <ion-item class="item-remove-animate item-avatar-left item-icon-right" 
-                      ng-repeat="article in articles| filter:search" >
+                      ng-repeat="article in articles| filter:search| orderBy:'-date'" >
                 <img ng-src="{{article.src}}">
                 <h2>{{article.name}}</h2>
                 <p>{{article.description}}</p>
+                <h5>{{article.date}}</h5>
                 
                 <i class="icon ion-chevron-right ion-trash-a" ng-click="remove({{article.id}})">
 <!--                    <p>{{article.id}}</p>-->

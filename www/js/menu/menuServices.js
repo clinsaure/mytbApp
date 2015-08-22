@@ -6,9 +6,9 @@
  */
 
 var angular;
-var articlesItem,
-        categoriesItem,
-        articleCatItem;
+var articlesItem;
+var categoriesItem;
+var articleCatItem;
 var responseItem;
 
 

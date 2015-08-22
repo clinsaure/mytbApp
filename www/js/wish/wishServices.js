@@ -68,7 +68,8 @@ angular.module('starter.wishlist.services', ['ngResource'])
 })
 
 .factory('WishPost', function($http, $state, $ionicPopup, $window){
-    
+//    $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+//    $http.defaults.headers.common['Authorization'] = sessionStorage.getItem("apikey");
     var wishPost = function (wishPostData) {
         
         var wishdata = "searchText=" + wishPostData.wishText;

@@ -18,7 +18,8 @@ angular.module('starter.article.controllers', ['starter.article.services'])
         $scope.articles = [];
         for(var i = 0; i < articles.length ; i++) {
            $scope.articles.push({id: articles[i].article_Id, name: articles[i].name,
-           description: articles[i].description, src: serviceURL + articles[i].image});
+           description: articles[i].description, date: articles[i].created_at,
+           src: serviceURL + articles[i].image});
         }
     });
     };
@@ -33,7 +34,8 @@ angular.module('starter.article.controllers', ['starter.article.services'])
         $scope.articles = [];
         for(var i = 0; i < articles.length ; i++) {
            $scope.articles.push({id: articles[i].article_Id, name: articles[i].name,
-           description: articles[i].description, src: serviceURL + articles[i].image});
+           description: articles[i].description, date: articles[i].created_at, 
+           src: serviceURL + articles[i].image});
         }
     });
     };
@@ -54,7 +56,8 @@ window.localStorage.articleId = $stateParams.articleId;
     $scope.article = selectArticle;
                 $scope.articles = [];
         $scope.articles.push({id: selectArticle.article_Id, name: selectArticle.name,
-           description: selectArticle.description, src: serviceURL + selectArticle.image});
+           description: selectArticle.description, src: serviceURL + selectArticle.image,
+       date: selectArticle.created_at});
        
 //       $scope.artcmsg = function () {
 //           console.log('log');
@@ -68,10 +71,11 @@ window.localStorage.articleId = $stateParams.articleId;
 //    $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
     $scope.articlePostData = {};
     // Perform the login action when the user submits the login form
-    $scope.doarticlePost = function () {
-//        console.log("controller data", $scope.articlePostData);
-        ArticlePost.articlePost($scope.articlePostData);
-        console.log($scope.articlePostData);
+    $scope.doarticlePost = function (formInfo) {
+        if(formInfo.$valid) {
+            ArticlePost.articlePost($scope.articlePostData);
+            console.log($scope.articlePostData);
+        }
     };
     
     $scope.getCategories = function(){
@@ -101,7 +105,8 @@ window.localStorage.articleId = $stateParams.articleId;
         $scope.articles = [];
         for(var i = 0; i < articles.length ; i++) {
            $scope.articles.push({id: articles[i].article_Id, name: articles[i].name,
-           description: articles[i].description, src: serviceURL + articles[i].image});
+           description: articles[i].description, src: serviceURL + articles[i].image,
+           date: articles[i].created_at});
         }
     });
     };

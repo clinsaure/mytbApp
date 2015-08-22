@@ -8,7 +8,7 @@ and open the template in the editor.
 <ion-view ng-class="" view-title="Post Article">
     <ion-content ng-init="getCategories()">
         <!--    <h1>Put Article</h1>-->
-<form name="formInfo" ng-submit="doarticlePost()" novalidate>
+<form name="formInfo" ng-submit="doarticlePost(formInfo)" novalidate="">
         <div class="list">
 
             <label class="item item-input">
@@ -25,13 +25,13 @@ and open the template in the editor.
             <label class="item item-input">
                 <span class="input-label">Name</span>
                 <input type="text" ng-model="articlePostData.name" name="name" 
-                       required="yes" minlength="5" placeholder="insert Name">
+                       required="yes" minlength="3" placeholder="insert Name">
             </label>
             <label class="error">
                <div ng-messages="formInfo.name.$error" style="color:red" role="alert" ng-if="formInfo.$submitted">
                     <div ng-message="required">Name required</div>
-                    <div ng-message="minlength">Name to long</div>
-                    <div ng-message="maxlength">Name to shot</div>
+                    <div ng-message="minlength">Name to shot</div>
+                    <div ng-message="maxlength">Name to long</div>
                 </div> 
             </label>
             
