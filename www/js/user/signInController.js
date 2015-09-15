@@ -9,7 +9,7 @@ var angular;
 
 angular.module('starter.signIn.controllers', ['starter.signIn.services'])
 
-.controller('SignInCtrl', function($scope, $ionicModal, SignIn, $http, $state, $rootScope, $ionicPush) { 
+.controller('SignInCtrl', function($scope, $timeout, SignIn, $http, $state, $rootScope, $ionicPush) { 
     
     // Form data for the login modal
     $scope.loginData = {};
@@ -20,9 +20,9 @@ angular.module('starter.signIn.controllers', ['starter.signIn.services'])
         });
         // Simulate a login delay. Remove this and replace with your login
         // code if using a login system
-        //    $timeout(function() {
-//      $scope.closeLogin();
-//    }, 1000);
+            $timeout(function() {
+      $scope.closeLogin();
+    }, 1000);
         }
     };
 

@@ -5,32 +5,43 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 
-<ion-view view-title="Post Article">
-    <ion-content>
+<ion-view ng-class="" view-title="Post Article">
+    <ion-content ng-init="getCategories()">
         <!--    <h1>Put Article</h1>-->
-<form ng-submit="postArticle()">
+<form name="formInfo" ng-submit="doarticlePost(formInfo)" novalidate="">
         <div class="list">
 
-            <label class="item item-input item-select">
-                <span class="input-label">Gategories</span>
-                <select>
-                    <option></option>
-                    <option>Blue</option>
-                    <!--<option selected>Green</option>-->
-                    <option>Red</option>
-                </select>
+            <label class="item item-input">
+                <span class="input-label">Categories</span>
+                <select ng-model="articlePostData.catName" name="categorie" required="yes">
+                    <option  ng-repeat="cat in categories" >{{cat.name}}</option>
+                </select> 
+            </label>
+            <label class="error">
+               <div ng-messages="formInfo.categorie.$error" style="color:red" role="alert" ng-if="formInfo.$submitted">
+                    <div ng-message="required">Categorie required</div>
+                </div> 
             </label>
             <label class="item item-input">
                 <span class="input-label">Name</span>
-                <input type="text">
+                <input type="text" ng-model="articlePostData.name" name="name" 
+                       required="yes" minlength="3" placeholder="insert Name">
             </label>
+            <label class="error">
+               <div ng-messages="formInfo.name.$error" style="color:red" role="alert" ng-if="formInfo.$submitted">
+                    <div ng-message="required">Name required</div>
+                    <div ng-message="minlength">Name to shot</div>
+                    <div ng-message="maxlength">Name to long</div>
+                </div> 
+            </label>
+            
             <label class="item item-input">
                 <span class="input-label">Description</span>
-                <input type="text">
+                <textarea type="text" ng-model="articlePostData.description" placeholder="insert description"></textarea>
             </label>
             <label class="item item-input">
                 <span class="input-label">Img</span>
-                <input type="text">
+                <input type="file" ng-model="articlePostData.image">
             </label>
             <label class="item">
                 <button class="button button-block button-positive" type="submit">Submit</button>
@@ -39,14 +50,3 @@ and open the template in the editor.
 </form>
     </ion-content>
 </ion-view>
-
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <p>hallo</p>
-    </body>
-</html>

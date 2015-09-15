@@ -1,2 +1,2 @@
-C:\Users\valery.kamdem\Dokumente\NetBeansProjects\mytbApp\platforms\android\build\intermediates\classes\debug
-C:\Users\valery.kamdem\Dokumente\NetBeansProjects\mytbApp\platforms\android\build\intermediates\pre-dexed\debug\classes-95923e99ade0185dc2f373aa1258655b848e0c22.jar
+D:\NetBeansProjects\mytbApp_10.09.2015\platforms\android\build\intermediates\classes\debug
+D:\NetBeansProjects\mytbApp_10.09.2015\platforms\android\build\intermediates\pre-dexed\debug\classes-e269eca55494e1bbe740e5ce64a611528acf2622.jar

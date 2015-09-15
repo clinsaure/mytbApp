@@ -75,6 +75,14 @@ angular.module('starter.wishlist.services', ['ngResource'])
         var wishdata = "searchText=" + wishPostData.wishText;
         // Simple POST request example (passing data) :
         if (wishPostData.wishText !== undefined){
+            
+//            $http({
+//    method: 'POST',
+//    url: serviceURL + "wishlist",
+//    data: wishdata,
+//    headers: { Authorization: sessionStorage.getItem("apikey") }
+//}).
+            
         $http.post(serviceURL + "wishlist", wishdata).
                 success(function (data, status, headers, config) {
                     // this callback will be called asynchronously

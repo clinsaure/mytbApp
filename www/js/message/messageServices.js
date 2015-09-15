@@ -15,7 +15,7 @@ angular.module('starter.message.services', ['ngResource'])
 
 .factory('Messages', function ($http, $state, $resource, $ionicPopup, $window) {
 
-//    $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+    $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
 //    $http.defaults.headers.common['Authorization'] = sessionStorage.getItem("apikey");
     
     var newMsg = function (postMsgData) {

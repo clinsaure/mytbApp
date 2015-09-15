@@ -2,11 +2,18 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\valery.kamdem\Dokumente\NetBeansProjects\mytbApp\platforms\android\build\intermediates\exploded-aar\android\CordovaLib\unspecified\debug\classes.jar"
+        jar="D:\NetBeansProjects\KamApp\platforms\android\build\intermediates\exploded-aar\android\CordovaLib\unspecified\debug\classes.jar"
         jumboMode="false"
-        revision="22.0.1"
-        sha1="c7fc39a4d0a18504aa9622cc6639bbd3fd760182">
-        <dex dex="C:\Users\valery.kamdem\Dokumente\NetBeansProjects\mytbApp\platforms\android\build\intermediates\pre-dexed\debug\classes-95923e99ade0185dc2f373aa1258655b848e0c22.jar" />
+        revision="23.0.0"
+        sha1="1ec44b48b977d701ac72fe9d0b6f2b4804336c48">
+        <dex dex="D:\NetBeansProjects\KamApp\platforms\android\build\intermediates\pre-dexed\debug\classes-f67f42fc9396052d24d4534cafa9e64102065383.jar" />
+    </item>
+    <item
+        jar="D:\NetBeansProjects\mytbApp_10.09.2015\platforms\android\build\intermediates\exploded-aar\android\CordovaLib\unspecified\debug\classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="95455cf91e7ed4f292180f42c7cf4c3b5326f0f0">
+        <dex dex="D:\NetBeansProjects\mytbApp_10.09.2015\platforms\android\build\intermediates\pre-dexed\debug\classes-e269eca55494e1bbe740e5ce64a611528acf2622.jar" />
     </item>
 
 </items>

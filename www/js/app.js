@@ -7,8 +7,8 @@
 // 'starter.controllers' is found in controllers.js
 //angular.module('starter', ['ngMessages'])
 
-var serviceURL = "http://localhost:81/tbServer/";
-//var serviceURL = "http://tbapp.kamdem-kenmogne.de/";
+//var serviceURL = "http://localhost:81/tbServer/";
+var serviceURL = "http://tbapp.kamdem-kenmogne.de/";
 
 var angular;
 angular.module('starter', ['ionic', 'ngCordova','ionic.service.core','ionic.service.push','ngMessages',
@@ -18,16 +18,158 @@ angular.module('starter', ['ionic', 'ngCordova','ionic.service.core','ionic.serv
    $ionicAppProvider.identify({
      app_id: '4f21f356',
      api_key: '069b7e5d0455d629b323ed0e0bc325aa376847224c5ac10c',
+     name: 'Kamdem-Ionic',
      dev_push: true,
-     gcm_id:'AIzaSyBvr6_x9GOXZSHx1cf-DTzJNAe3A6ODO10'
-   });    
+     gcm_id:'AIzaSyB8jBkZarMqufN09EIYWdac_7AGfmQK7Eo',
+     senderID: 'tpapps-1044'
+   }); 
+   
 }])
 
-.run(function($ionicPlatform, $http, $rootScope) {
+//.config('$httpProvider','$cookieStore',[function($httpProvider,$cookieStore){
+//   //$httpProvider.interceptors.push(window.localStorage.getItem("apikey")); 
+//    $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'; 
+//}])
+
+.run(function($ionicPlatform, $http, $rootScope, $cordovaPush,$ionicPush, $ionicUser) {
+ 
+    var androidConfig = {
+//        'canShowAlert': false,
+        'badge': true,
+        'sound': true,
+        'alert': true,
+        onNotification: function (notification) {
+                console.log('onNotification', JSON.stringify(notification));
+                // Called for each notification for custom handling
+//                $scope.lastNotification = JSON.stringify(notification);
+            }
+        };
+        
+    var user = $ionicUser.get();
+    if(!user.user_id) {
+      // Set your user_id here, or generate a random one.
+      user.user_id = $ionicUser.generateGUID();
+    };
+    
+//    angular.extend(user, {
+//      name: 'Test User',
+//      bio: 'I come from planet Ion'
+//    });
+        $ionicUser.identify(user).then(function(){
+//      $scope.identified = true;
+            alert('Identified user ' + user.name + '\n ID ' + user.user_id);
+    });
+//        $ionicUser.identify({
+//            user_id: $ionicUser.generateGUID(),
+//            name: 'Test User',
+//            message: 'I come from planet Ion'
+//        });
+        
+//            $ionicPush.register({
+//                canShowAlert: false,
+//                onNotification: function (notification) {
+//                    console.log('onNotification', JSON.stringify(notification));
+//                    // Called for each notification for custom handling
+//                    $scope.lastNotification = JSON.stringify(notification);
+//                }
+//            },
+//            // Some metadata to send through the webhook for your own
+//            // linking of device token and user
+//            {
+//                "user_id": 0,
+//                "email": "tester@example.com"
+//            }).then(function (deviceToken) {
+//                console.log("deviceToken", deviceToken);
+//                $scope.token = deviceToken;
+//            });
+
+        $ionicPush.register(androidConfig).then(function(result) {
+            // Success -- send deviceToken to server, and store for future use
+            console.log('result: ' + result);
+            $rootScope.deviceToken = result;
+            //$http.post('http://server.co/', {user: 'Bob', tokenID: result.deviceToken})
+        }, function(err) {
+            alert('Registration error: ' + err);
+        });
+
+
+        $rootScope.$on('$cordovaPush:notificationReceived', function(event, notification) {
+            console.log('Got token', notification.token, notification.platform);
+            if (notification.alert) {
+                navigator.notification.alert(notification.alert);
+            }
+
+            if (notification.sound) {
+                var snd = new Media(event.sound);
+                snd.play();
+            }
+
+            if (notification.badge) {
+                $ionicPush.setBadgeNumber(notification.badge).then(function(result) {
+                    // Success!
+                }, function(err) {
+                    // An error occurred. Show a message to the user
+                });
+            }
+        });
+ 
+////    PushProcessingService.initialize();
+//    var androidConfig = {
+//    senderID: 'tpapps-1044',
+//    gcm_id:'AIzaSyB8jBkZarMqufN09EIYWdac_7AGfmQK7Eo',
+//    canShowAlert: false, //Can pushes show an alert on your screen?
+//        canSetBadge: true, //Can pushes update app icon badges?
+//        canPlaySound: true, //Can notifications play a sound?
+//        canRunActionsOnWake: true
+//  };
+//
+//
+//
+//  document.addEventListener("deviceready", function(){
+//    $cordovaPush.register(androidConfig).then(function(result) {
+//      // Success
+//      arlert("je suis dans cordova");
+//    }, function(err) {
+//      // Error
+//      arlert("je suis dans cordova fail");
+//    });
+//
+//    $rootScope.$on('$cordovaPush:notificationReceived', function(event, notification) {
+//      switch(notification.event) {
+//        case 'registered':
+//          if (notification.regid.length > 0 ) {
+//            alert('registration ID = ' + notification.regid);
+//          }
+//          break;
+//
+//        case 'message':
+//          // this is the actual push notification. its format depends on the data model from the push server
+//          alert('message = ' + notification.message + ' msgCount = ' + notification.msgcnt);
+//          break;
+//
+//        case 'error':
+//          alert('GCM error = ' + notification.msg);
+//          break;
+//
+//        default:
+//          alert('An unknown GCM event has occurred');
+//          break;
+//      }
+//    });
+//
+//
+//    // WARNING: dangerous to unregister (results in loss of tokenID)
+//    $cordovaPush.unregister(options).then(function(result) {
+//      // Success!
+//    }, function(err) {
+//      // Error
+//    })
+//
+//  }, false); 
+    
+    
    //send Apikey to server 
   $http.defaults.headers.common['Authorization'] = window.localStorage.getItem("apikey");
-//  $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
-//  $http.defaults.headers.post["Content-Type"] = "X-Ionic-Application-Id: 4f21f356";
 
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard

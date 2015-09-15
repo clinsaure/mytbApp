@@ -10,6 +10,7 @@ var articlesItem;
 var categoriesItem;
 var articleCatItem;
 var responseItem;
+var messagesItem;
 
 
 angular.module('starter.menu.services', ['ngMessages']),
@@ -31,8 +32,21 @@ var _articles = function() {
          });   
 };
 
+var _messages = function() {
+    return $http.get(serviceURL + "messages" ,{
+//        headers: 'Access-Control-Allow-Headers: Content-Type, x-xsrf-token',
+        isArray: true,
+        crossDomain : true
+    })
+        .success(function(data) {
+            messagesItem = data;
+            window.localStorage.mymsg = messagesItem.length;
+         });   
+};
+
   return {
-    all: _articles
+    all: _articles,
+    message: _messages
     };
 
 })

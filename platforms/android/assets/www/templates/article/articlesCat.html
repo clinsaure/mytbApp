@@ -1,4 +1,4 @@
-<ion-view view-title="Articles">
+<ion-view ng-class="" view-title="Articles">
     
   <ion-content ng-init="loadArticlesCat()">
       <label class="item item-input">
@@ -6,11 +6,12 @@
   <input type="search" placeholder="Search" ng-model="search">
 </label>
       <ion-list >
-      <ion-item class="item-remove-animate item-avatar-left item-icon-right" ng-repeat="article in articles | filter:search | orderBy:orderProp" type="item-text-wrap" href="#/app/articles/{{articles[$index].id}}">
+      <ion-item class="item-remove-animate item-avatar-left item-icon-right" ng-repeat="article in articles | filter:search | orderBy:'-date'" type="item-text-wrap" href="#/app/articles/{{article.id}}">
         <!--<img ng-src="http://localhost:81/tauschboerse-server/{{article.image}}">-->
-        <img ng-src="{{articles[$index].src}}">
+        <img ng-src="{{article.src}}">
         <h2>{{article.name}}</h2>
         <p>{{article.description}}</p>
+        <h5>{{article.date}}</h5>
         <i class="icon ion-chevron-right icon-accessory"></i>
 <!--        <ion-option-button class="button-assertive" ng-click="remove(article)">
           Delete

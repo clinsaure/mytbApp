@@ -29,6 +29,7 @@ angular.module('starter.article.controllers', ['starter.article.services'])
 .controller('MyArticlesCtrl', function($http, $scope, $stateParams, MyArticles) {
 //    $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
     $scope.loadMyArticles = function() {
+         $http.defaults.headers.common['Authorization'] = window.localStorage.getItem("apikey");
         MyArticles.all($stateParams.categorieId)
         .success(function(articles){
         $scope.articles = [];
@@ -74,7 +75,6 @@ window.localStorage.articleId = $stateParams.articleId;
     $scope.doarticlePost = function (formInfo) {
         if(formInfo.$valid) {
             ArticlePost.articlePost($scope.articlePostData);
-            console.log($scope.articlePostData);
         }
     };
     

@@ -1,2 +1,0 @@
-# tbApp
-Tauschboerse Application
